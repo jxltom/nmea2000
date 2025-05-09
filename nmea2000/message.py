@@ -1,7 +1,7 @@
 from datetime import datetime
 import binascii
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Union
 import orjson
 from .consts import PhysicalQuantities, FieldTypes
 from .utils import kelvin_to_celsius, kelvin_to_fahrenheit, pascal_to_bar, pascal_to_PSI
@@ -77,14 +77,14 @@ class NMEA2000Message:
 @dataclass
 class NMEA2000Field:
     id: str
-    name: str | None = None
-    description: str | None = None
-    unit_of_measurement: str | None = None
-    value: str | int | float | bytes = 0
-    raw_value: int | bytes = 0
-    physical_quantities: PhysicalQuantities | None = None
+    name: Union[str, None] = None
+    description: Union[str, None] = None
+    unit_of_measurement: Union[str, None] = None
+    value: Union[str, int, float, bytes] = 0
+    raw_value: Union[int, bytes] = 0
+    physical_quantities: Union[PhysicalQuantities, None] = None
     type: FieldTypes = FieldTypes.NUMBER
-    part_of_primary_key: bool | None = None
+    part_of_primary_key: Union[bool, None] = None
 
     def __repr__(self):
         return f"NMEA2000Field(id={self.id}, name={self.name}, description={self.description}, unit_of_measurement={self.unit_of_measurement}, value={self.value}, raw_value={self.raw_value}, physical_quantities={self.physical_quantities}, type={self.type}, part_of_primary_key = {self.part_of_primary_key})"
