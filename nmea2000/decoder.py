@@ -309,7 +309,7 @@ class NMEA2000Decoder():
         if not decode_func:
             raise ValueError(f"No decoding function found for PGN: {pgn}")
 
-        nmea2000Message = decode_func(int.from_bytes(data, "big"))
+        nmea2000Message = decode_func(int.from_bytes(data, "little"))
         nmea2000Message.add_data(src, dest, priority, timestamp)
         nmea2000Message.apply_preferred_units(self.preferred_units)
         sys.stdout.write(nmea2000Message.to_string_test_style()+"\n")
