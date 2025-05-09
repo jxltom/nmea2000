@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 import binascii
 from dataclasses import dataclass, field
@@ -55,8 +56,8 @@ class NMEA2000Message:
         return f"NMEA2000Message(PGN={self.PGN}, id={self.id}, pri={self.priority}, src={self.source}, dest={self.destination}, description={self.description}, fields={self.fields})"
 
     def to_string_test_style(self):
-        fields_str = ', '.join([field.to_string_test_style() for field in self.fields])
-        return f"{self.PGN} {self.description}: {fields_str}"
+        fields_str = os.linesep.join([field.to_string_test_style() for field in self.fields])
+        return f"{self.PGN} {self.description}:{os.linesep}{fields_str}"
 
     def to_json(self):
         def default(obj: Any) -> Any:
