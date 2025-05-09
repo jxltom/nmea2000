@@ -8,8 +8,11 @@ from .pgns import *  # noqa: F403
 from .consts import PhysicalQuantities
 import os
 import uuid
+import json
 
 logger = logging.getLogger(__name__)
+with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "canboat.json")) as f:
+    canboat_json_data = {_["PGN"]: _ for _ in json.load(f)["PGNs"]}
 
 class fast_pgn_metadata():
     def __init__(self) -> None:
@@ -275,7 +278,6 @@ class NMEA2000Decoder():
 
         if is_fast_func:
             is_fast = is_fast_func()
-            logger.info(f"Is fast PGN: {is_fast}")
             return is_fast
         else:
             raise ValueError(f"No function found for PGN: {pgn_id}")
