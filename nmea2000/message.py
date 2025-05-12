@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from typing import Any, Union
 import orjson
 from .consts import PhysicalQuantities, FieldTypes
-from .utils import kelvin_to_celsius, kelvin_to_fahrenheit, pascal_to_bar, pascal_to_PSI, radians_to_degrees
+from .utils import kelvin_to_celsius, kelvin_to_fahrenheit, pascal_to_bar, pascal_to_PSI, radians_to_degrees, radianspersecond_to_degreespersecond
 
 # Helper function
 def int_to_bytes(value):
@@ -61,7 +61,7 @@ class NMEA2000Message:
                 requested_unit = preferred_units.get(PhysicalQuantities.ANGULAR_VELOCITY, None)
                 if requested_unit == "degree/s":
                     f.unit_of_measurement = "Degree/s"
-                    f.value = radians_to_degrees(f.value) 
+                    f.value = radianspersecond_to_degreespersecond(f.value)
 
     def __repr__(self):
         return f"NMEA2000Message(PGN={self.PGN}, id={self.id}, pri={self.priority}, src={self.source}, dest={self.destination}, description={self.description}, fields={self.fields})"

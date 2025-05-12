@@ -80,7 +80,20 @@ def radians_to_degrees(radians):
         return None
 
     # Convert radians to degrees
-    degrees = round(math.degrees(radians), 0)
+    degrees = round(math.degrees(radians), 1)
+    return degrees
+
+def radianspersecond_to_degreespersecond(radianspersecond):
+    """
+    Converts an angle from radians to degrees.
+    Returns:
+        float: The angle in degrees.
+    """
+    if radianspersecond is None:
+        return None
+
+    # Convert radians to degrees
+    degrees = round(math.degrees(radianspersecond), 6)
     return degrees
 
 def decode_int(data_raw: int, bit_offset: int, bit_length: int):
