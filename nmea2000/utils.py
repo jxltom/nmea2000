@@ -70,7 +70,6 @@ def mps_to_knots(mps):
 
     return knots
 
-
 def radians_to_degrees(radians):
     """
     Converts an angle from radians to degrees.

@@ -1,11 +1,12 @@
 import os
+import math
 from datetime import datetime
 import binascii
 from dataclasses import dataclass, field
 from typing import Any, Union
 import orjson
 from .consts import PhysicalQuantities, FieldTypes
-from .utils import kelvin_to_celsius, kelvin_to_fahrenheit, pascal_to_bar, pascal_to_PSI
+from .utils import kelvin_to_celsius, kelvin_to_fahrenheit, pascal_to_bar, pascal_to_PSI, radians_to_degrees
 
 # Helper function
 def int_to_bytes(value):
@@ -51,6 +52,16 @@ class NMEA2000Message:
                 elif requested_unit == "psi":
                     f.unit_of_measurement = "PSI"
                     f.value = pascal_to_PSI(f.value)
+            if f.physical_quantities == PhysicalQuantities.ANGLE:
+                requested_unit = preferred_units.get(PhysicalQuantities.ANGLE, None)
+                if requested_unit == "degree":
+                    f.unit_of_measurement = "Degree"
+                    f.value = radians_to_degrees(f.value)
+            if f.physical_quantities == PhysicalQuantities.ANGULAR_VELOCITY:
+                requested_unit = preferred_units.get(PhysicalQuantities.ANGULAR_VELOCITY, None)
+                if requested_unit == "degree/s":
+                    f.unit_of_measurement = "Degree/s"
+                    f.value = radians_to_degrees(f.value) 
 
     def __repr__(self):
         return f"NMEA2000Message(PGN={self.PGN}, id={self.id}, pri={self.priority}, src={self.source}, dest={self.destination}, description={self.description}, fields={self.fields})"
