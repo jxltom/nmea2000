@@ -6099,7 +6099,7 @@ def decode_pgn_59904(_data_raw_: int) -> NMEA2000Message:
     running_bit_offset = 0
     # 1:pgn | Offset: 0, Length: 24, Signed: False Resolution: 1, Field Type: PGN, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
-    raise Exception("FieldType (PGN) not supported")
+    pgn = pgn_raw = decode_number(_data_raw_, running_bit_offset, 24, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('pgn', 'PGN', None, None, pgn, pgn_raw, None, FieldTypes.PGN, False))
     running_bit_offset += 24
 
