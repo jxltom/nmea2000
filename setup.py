@@ -5,7 +5,7 @@ setup(
     name='nmea2000',
     packages=find_packages(),
     package_data={'nmea2000': ['*.json']},
-    version='2025.5.1',
+    version='2025.5.4',
     description='NMEA 2000 encoder and decoder',
     long_description=open('README.md').read(),  # Readme file for long description
     long_description_content_type="text/markdown",

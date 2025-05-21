@@ -54,13 +54,13 @@ class NMEA2000Message:
                     f.value = pascal_to_PSI(f.value)
             if f.physical_quantities == PhysicalQuantities.ANGLE:
                 requested_unit = preferred_units.get(PhysicalQuantities.ANGLE, None)
-                if requested_unit == "degree":
-                    f.unit_of_measurement = "Degree"
+                if requested_unit == "deg":
+                    f.unit_of_measurement = "Deg"
                     f.value = radians_to_degrees(f.value)
             if f.physical_quantities == PhysicalQuantities.ANGULAR_VELOCITY:
                 requested_unit = preferred_units.get(PhysicalQuantities.ANGULAR_VELOCITY, None)
-                if requested_unit == "degree/s":
-                    f.unit_of_measurement = "Degree/s"
+                if requested_unit == "deg/s":
+                    f.unit_of_measurement = "Deg/s"
                     f.value = radianspersecond_to_degreespersecond(f.value)
 
     def __repr__(self):
