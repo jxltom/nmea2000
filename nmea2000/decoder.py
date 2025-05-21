@@ -11,7 +11,7 @@ import uuid
 import json
 
 logger = logging.getLogger(__name__)
-with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), "canboat.json")) as f:
+with open(os.path.join(os.path.dirname(__file__), "canboat.json")) as f:
     canboat_json_data = {_["PGN"]: _ for _ in json.load(f)["PGNs"]}
 
 class fast_pgn_metadata():
