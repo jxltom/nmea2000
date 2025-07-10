@@ -12,7 +12,7 @@ setup(
     author='Tomer-W',
     license='Apache-2.0',
     url="https://github.com/tomer-w/nmea2000",
-    install_requires=['orjson >= 3.10,<4.0', 'pyserial-asyncio >= 0.6', 'tenacity >= 9.0.0'],
+    install_requires=['orjson >= 3.9,<4.0', 'pyserial-asyncio >= 0.6', 'tenacity >= 8.0.0'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest==8.3.5', 'pytest-asyncio'],
     test_suite='tests',
