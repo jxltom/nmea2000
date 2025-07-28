@@ -16,7 +16,7 @@ master_dict = {
         1: "Highway",
         2: "Agriculture",
         3: "Construction",
-        4: "Marine",
+        4: "Marine Industry",
         5: "Industrial",
     },
     'MANUFACTURER_CODE': {
@@ -889,6 +889,14 @@ master_dict = {
         70: "Wind",
         74: "Track",
     },
+    'SEATALK_PILOT_HULL_TYPE': {
+        0: "Sail",
+        1: "Sail (slow turn)",
+        2: "Sail Catamaran",
+        3: "Power (slow turn)",
+        5: "Power (fast turn)",
+        8: "Power",
+    },
     'ENTERTAINMENT_ZONE': {
         0: "All zones",
         1: "Zone 1",
@@ -1537,6 +1545,7 @@ master_dict = {
         1: "Green",
         2: "Blue",
         3: "White",
+        4: "Magenta",
     },
     'SIMNET_DISPLAY_GROUP': {
         1: "Default",
@@ -1600,30 +1609,54 @@ master_dict = {
     },
     'FUSION_MESSAGE_ID': {
         1: "Request Status",
-        2: "Source",
-        4: "Track Info",
-        5: "Track Title",
-        6: "Track Artist",
-        7: "Track Album",
-        9: "Track Progress",
-        11: "AM/FM Station",
-        12: "VHF",
-        13: "Squelch",
-        14: "Scan",
-        17: "Mute",
-        20: "Replay",
+        2: "Set Source",
+        3: "Media Command",
+        5: "Tuner Command",
+        6: "Marine Tuner Command",
+        7: "Set Marine Tuner Squelch",
+        8: "Set Marine Tuner Scan Mode",
+        9: "Menu Action",
+        10: "Request Menu Count",
+        11: "Request Menu Item",
+        12: "Request Menu Lock ID",
+        13: "Set Aux Gain",
+        15: "Set Settings",
+        16: "DAB Updtate Command",
+        17: "Set Mute",
+        18: "Set Balance",
+        19: "Set Low Pass Filer",
+        20: "Set Sublevel",
+        22: "Set Equalizer",
+        23: "Set Volume Limit",
         24: "Set Zone Volume",
         25: "Set All Volumes",
-        26: "Sub Volume",
-        27: "Tone",
-        29: "Volume",
-        32: "Power",
-        33: "Unit Name",
-        36: "SiriusXM Channel",
-        37: "SiriusXM Title",
-        38: "SiriusXM Artist",
-        40: "SiriusXM Genre",
-        45: "Zone Name",
+        27: "Set Line Level Control",
+        28: "Power",
+        29: "Set Device Name",
+        30: "Send Sirius Command",
+        31: "Set Sirius Parental",
+        33: "Send Factory Reset Command",
+        34: "Set Zone Name",
+        35: "Send Dvd Command",
+        36: "Dvd Press Ir Key",
+        39: "Send Select Sirius Team",
+        40: "Send Select Sirius Artist",
+        41: "Send Sirius Sport Alert User Action",
+        45: "Send Sirius Artist Song User Action",
+        50: "Send Multiroom Command",
+        51: "Get Multiroom Device Record",
+        52: "Scan Multirooom Devices",
+        53: "Send File Transfer",
+        54: "Set Loud",
+        56: "Fapi Set Source Multiroom Enabled",
+        57: "Request Head Unit Dsp Settings",
+        64: "Send Transfer Status",
+        65: "Fapi Get Server Info",
+        69: "Fapi Set Source Enabled",
+        70: "Fapi Set Source Name",
+        73: "Send External Amp Gain",
+        74: "Send Internal Amp Gain",
+        75: "Send Mono",
     },
     'FUSION_PLAY_STATUS': {
         0: "Invalid",
@@ -2008,9 +2041,8 @@ master_dict = {
         8: "4800",
         9: "9600",
         10: "19200",
-        11: "19200",
-        12: "38400",
-        13: "57600",
+        11: "38400",
+        12: "57600",
     },
     'SERIAL_DETECTION_MODE': {
         0: "Auto bit rate",
@@ -2169,6 +2201,24 @@ master_dict = {
         3: "4 nm",
         4: "5 nm",
         5: "6 nm",
+    },
+    'MARETRON_PRODUCT_CODE': {
+        434: "SSC200",
+        2686: "SSC300",
+    },
+    'MARETRON_SOFTWARE_CODE': {
+        1: "Version 1",
+    },
+    'MARETRON_COMMAND': {
+        80: "Deviation calibration",
+    },
+    'MARETRON_STATUS_DEVIATION': {
+        1: "Started",
+        2: "Completed successfully",
+        3: "Failed to complete",
+        4: "Turning too fast",
+        5: "Turning too slow",
+        6: "Invalid movement",
     },
 }
 
@@ -2468,7 +2518,7 @@ lookup_dict_encode_INDUSTRY_CODE = {
     "Highway" : 1,
     "Agriculture" : 2,
     "Construction" : 3,
-    "Marine" : 4,
+    "Marine Industry" : 4,
     "Industrial" : 5,
 }
 def lookup_encode_INDUSTRY_CODE(value):
@@ -3633,6 +3683,20 @@ def lookup_encode_SEATALK_PILOT_MODE(value):
     result = lookup_dict_encode_SEATALK_PILOT_MODE.get(value, None)
     if result is None:
         raise Exception(f"Cant encode this message, {value} is missing from SEATALK_PILOT_MODE")
+    return result
+
+lookup_dict_encode_SEATALK_PILOT_HULL_TYPE = {
+    "Sail" : 0,
+    "Sail (slow turn)" : 1,
+    "Sail Catamaran" : 2,
+    "Power (slow turn)" : 3,
+    "Power (fast turn)" : 5,
+    "Power" : 8,
+}
+def lookup_encode_SEATALK_PILOT_HULL_TYPE(value):
+    result = lookup_dict_encode_SEATALK_PILOT_HULL_TYPE.get(value, None)
+    if result is None:
+        raise Exception(f"Cant encode this message, {value} is missing from SEATALK_PILOT_HULL_TYPE")
     return result
 
 lookup_dict_encode_ENTERTAINMENT_ZONE = {
@@ -4835,6 +4899,7 @@ lookup_dict_encode_SIMNET_NIGHT_MODE_COLOR = {
     "Green" : 1,
     "Blue" : 2,
     "White" : 3,
+    "Magenta" : 4,
 }
 def lookup_encode_SIMNET_NIGHT_MODE_COLOR(value):
     result = lookup_dict_encode_SIMNET_NIGHT_MODE_COLOR.get(value, None)
@@ -4946,30 +5011,54 @@ def lookup_encode_SIMNET_ALARM(value):
 
 lookup_dict_encode_FUSION_MESSAGE_ID = {
     "Request Status" : 1,
-    "Source" : 2,
-    "Track Info" : 4,
-    "Track Title" : 5,
-    "Track Artist" : 6,
-    "Track Album" : 7,
-    "Track Progress" : 9,
-    "AM/FM Station" : 11,
-    "VHF" : 12,
-    "Squelch" : 13,
-    "Scan" : 14,
-    "Mute" : 17,
-    "Replay" : 20,
+    "Set Source" : 2,
+    "Media Command" : 3,
+    "Tuner Command" : 5,
+    "Marine Tuner Command" : 6,
+    "Set Marine Tuner Squelch" : 7,
+    "Set Marine Tuner Scan Mode" : 8,
+    "Menu Action" : 9,
+    "Request Menu Count" : 10,
+    "Request Menu Item" : 11,
+    "Request Menu Lock ID" : 12,
+    "Set Aux Gain" : 13,
+    "Set Settings" : 15,
+    "DAB Updtate Command" : 16,
+    "Set Mute" : 17,
+    "Set Balance" : 18,
+    "Set Low Pass Filer" : 19,
+    "Set Sublevel" : 20,
+    "Set Equalizer" : 22,
+    "Set Volume Limit" : 23,
     "Set Zone Volume" : 24,
     "Set All Volumes" : 25,
-    "Sub Volume" : 26,
-    "Tone" : 27,
-    "Volume" : 29,
-    "Power" : 32,
-    "Unit Name" : 33,
-    "SiriusXM Channel" : 36,
-    "SiriusXM Title" : 37,
-    "SiriusXM Artist" : 38,
-    "SiriusXM Genre" : 40,
-    "Zone Name" : 45,
+    "Set Line Level Control" : 27,
+    "Power" : 28,
+    "Set Device Name" : 29,
+    "Send Sirius Command" : 30,
+    "Set Sirius Parental" : 31,
+    "Send Factory Reset Command" : 33,
+    "Set Zone Name" : 34,
+    "Send Dvd Command" : 35,
+    "Dvd Press Ir Key" : 36,
+    "Send Select Sirius Team" : 39,
+    "Send Select Sirius Artist" : 40,
+    "Send Sirius Sport Alert User Action" : 41,
+    "Send Sirius Artist Song User Action" : 45,
+    "Send Multiroom Command" : 50,
+    "Get Multiroom Device Record" : 51,
+    "Scan Multirooom Devices" : 52,
+    "Send File Transfer" : 53,
+    "Set Loud" : 54,
+    "Fapi Set Source Multiroom Enabled" : 56,
+    "Request Head Unit Dsp Settings" : 57,
+    "Send Transfer Status" : 64,
+    "Fapi Get Server Info" : 65,
+    "Fapi Set Source Enabled" : 69,
+    "Fapi Set Source Name" : 70,
+    "Send External Amp Gain" : 73,
+    "Send Internal Amp Gain" : 74,
+    "Send Mono" : 75,
 }
 def lookup_encode_FUSION_MESSAGE_ID(value):
     result = lookup_dict_encode_FUSION_MESSAGE_ID.get(value, None)
@@ -5558,9 +5647,8 @@ lookup_dict_encode_SERIAL_BIT_RATE = {
     "4800" : 8,
     "9600" : 9,
     "19200" : 10,
-    "19200" : 11,
-    "38400" : 12,
-    "57600" : 13,
+    "38400" : 11,
+    "57600" : 12,
 }
 def lookup_encode_SERIAL_BIT_RATE(value):
     result = lookup_dict_encode_SERIAL_BIT_RATE.get(value, None)
@@ -5852,6 +5940,48 @@ def lookup_encode_ZONE_SIZE(value):
         raise Exception(f"Cant encode this message, {value} is missing from ZONE_SIZE")
     return result
 
+lookup_dict_encode_MARETRON_PRODUCT_CODE = {
+    "SSC200" : 434,
+    "SSC300" : 2686,
+}
+def lookup_encode_MARETRON_PRODUCT_CODE(value):
+    result = lookup_dict_encode_MARETRON_PRODUCT_CODE.get(value, None)
+    if result is None:
+        raise Exception(f"Cant encode this message, {value} is missing from MARETRON_PRODUCT_CODE")
+    return result
+
+lookup_dict_encode_MARETRON_SOFTWARE_CODE = {
+    "Version 1" : 1,
+}
+def lookup_encode_MARETRON_SOFTWARE_CODE(value):
+    result = lookup_dict_encode_MARETRON_SOFTWARE_CODE.get(value, None)
+    if result is None:
+        raise Exception(f"Cant encode this message, {value} is missing from MARETRON_SOFTWARE_CODE")
+    return result
+
+lookup_dict_encode_MARETRON_COMMAND = {
+    "Deviation calibration" : 80,
+}
+def lookup_encode_MARETRON_COMMAND(value):
+    result = lookup_dict_encode_MARETRON_COMMAND.get(value, None)
+    if result is None:
+        raise Exception(f"Cant encode this message, {value} is missing from MARETRON_COMMAND")
+    return result
+
+lookup_dict_encode_MARETRON_STATUS_DEVIATION = {
+    "Started" : 1,
+    "Completed successfully" : 2,
+    "Failed to complete" : 3,
+    "Turning too fast" : 4,
+    "Turning too slow" : 5,
+    "Invalid movement" : 6,
+}
+def lookup_encode_MARETRON_STATUS_DEVIATION(value):
+    result = lookup_dict_encode_MARETRON_STATUS_DEVIATION.get(value, None)
+    if result is None:
+        raise Exception(f"Cant encode this message, {value} is missing from MARETRON_STATUS_DEVIATION")
+    return result
+
 
 
 
@@ -5870,7 +6000,7 @@ lookup_field_type_dict_SIMNET_KEY_VALUE = {
     5160: LookupFieldTypeEnumeration("Time format", FieldTypes.LOOKUP, None, None, 8, "SIMNET_TIME_FORMAT"),
     5161: LookupFieldTypeEnumeration("Time hour display", FieldTypes.LOOKUP, None, None, 8, "SIMNET_HOUR_DISPLAY"),
     9983: LookupFieldTypeEnumeration("Night mode", FieldTypes.LOOKUP, None, None, 8, "SIMNET_NIGHT_MODE"),
-    11524: LookupFieldTypeEnumeration("True wind shift", FieldTypes.NUMBER, 0.01, "m/s", 16, None),
+    11524: LookupFieldTypeEnumeration("True wind shift", FieldTypes.NUMBER, 0.0001, "rad", 16, None),
     22296: LookupFieldTypeEnumeration("AP low boat speed", FieldTypes.NUMBER, 0.01, "m/s", 16, None),
     32789: LookupFieldTypeEnumeration("Alert bits", FieldTypes.BITLOOKUP, None, None, 16, None),
     44079: LookupFieldTypeEnumeration("Night mode color", FieldTypes.LOOKUP, None, None, 8, "SIMNET_NIGHT_MODE_COLOR"),
@@ -6592,23 +6722,23 @@ def decode_pgn_60928(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('uniqueNumber', 'Unique Number', "ISO Identity Number", None, unique_number, unique_number_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 21
 
-    # 2:manufacturer_code | Offset: 21, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 2:manufacturer_code | Offset: 21, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 21
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
-    # 3:device_instance_lower | Offset: 32, Length: 3, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 3:device_instance_lower | Offset: 32, Length: 3, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     device_instance_lower = device_instance_lower_raw = decode_number(_data_raw_, running_bit_offset, 3, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceLower', 'Device Instance Lower', "ISO ECU Instance", None, device_instance_lower, device_instance_lower_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceLower', 'Device Instance Lower', "ISO ECU Instance", None, device_instance_lower, device_instance_lower_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 3
 
-    # 4:device_instance_upper | Offset: 35, Length: 5, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 4:device_instance_upper | Offset: 35, Length: 5, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 35
     device_instance_upper = device_instance_upper_raw = decode_number(_data_raw_, running_bit_offset, 5, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceUpper', 'Device Instance Upper', "ISO Function Instance", None, device_instance_upper, device_instance_upper_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceUpper', 'Device Instance Upper', "ISO Function Instance", None, device_instance_upper, device_instance_upper_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 5
 
     # 5:device_function | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: INDIRECT_LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -6634,10 +6764,10 @@ def decode_pgn_60928(_data_raw_: int) -> NMEA2000Message:
     device_function = master_indirect_lookup_dict['DEVICE_FUNCTION'].get(combined_key, None)
     nmea2000Message.fields[4].value = device_function
 
-    # 8:system_instance | Offset: 56, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 8:system_instance | Offset: 56, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 56
     system_instance = system_instance_raw = decode_number(_data_raw_, running_bit_offset, 4, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('systemInstance', 'System Instance', "ISO Device Class Instance", None, system_instance, system_instance_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('systemInstance', 'System Instance', "ISO Device Class Instance", None, system_instance, system_instance_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 4
 
     # 9:industry_group | Offset: 60, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -6755,11 +6885,11 @@ def decode_pgn_61184_0xef00ManufacturerProprietarySingleFrameAddressed(_data_raw
     """Decode PGN 61184."""
     nmea2000Message = NMEA2000Message(61184, '0xef00ManufacturerProprietarySingleFrameAddressed', '0xEF00: Manufacturer Proprietary single-frame addressed')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -6768,11 +6898,11 @@ def decode_pgn_61184_0xef00ManufacturerProprietarySingleFrameAddressed(_data_raw
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:data | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -6816,11 +6946,11 @@ def decode_pgn_61184_seatalkWirelessKeypadLightControl(_data_raw_: int) -> NMEA2
     """Decode PGN 61184."""
     nmea2000Message = NMEA2000Message(61184, 'seatalkWirelessKeypadLightControl', 'Seatalk: Wireless Keypad Light Control')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -6829,11 +6959,11 @@ def decode_pgn_61184_seatalkWirelessKeypadLightControl(_data_raw_: int) -> NMEA2
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 1, PartOfPrimaryKey: True,
@@ -6925,11 +7055,11 @@ def decode_pgn_61184_seatalkWirelessKeypadControl(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 61184."""
     nmea2000Message = NMEA2000Message(61184, 'seatalkWirelessKeypadControl', 'Seatalk: Wireless Keypad Control')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -6938,17 +7068,17 @@ def decode_pgn_61184_seatalkWirelessKeypadControl(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:pid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
-    pid = pid_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('pid', 'PID', None, None, pid, pid_raw, None, FieldTypes.NUMBER, True))
+    proprietary_id = proprietary_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('PID', 'Proprietary ID', None, None, proprietary_id, proprietary_id_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
     # 5:variant | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -6992,10 +7122,10 @@ def encode_pgn_61184_seatalkWirelessKeypadControl(nmea2000Message: NMEA2000Messa
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # pid | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'pid')
+    # PID | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    field = next(f for f in nmea2000Message.fields if f.id == 'PID')
     if field is None:
-        raise Exception("Cant encode this message, missing 'PID'")
+        raise Exception("Cant encode this message, missing 'Proprietary ID'")
     field_value = encode_number(field.value, 8, False, 1)
     data_raw |= (field_value & 0xFF) << 16
     # variant | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
@@ -7022,11 +7152,11 @@ def decode_pgn_61184_victronBatteryRegister(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 61184."""
     nmea2000Message = NMEA2000Message(61184, 'victronBatteryRegister', 'Victron Battery Register')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 358, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 358, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Victron Energy", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Victron Energy", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -7035,11 +7165,11 @@ def decode_pgn_61184_victronBatteryRegister(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:register_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -7099,11 +7229,11 @@ def decode_pgn_61440(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 61440."""
     nmea2000Message = NMEA2000Message(61440, '0xf0000xfeffStandardizedSingleFrameNonAddressed', '0xF000-0xFEFF: Standardized single-frame non-addressed')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -7112,11 +7242,11 @@ def decode_pgn_61440(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:data | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -7416,16 +7546,16 @@ def decode_pgn_65005(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65005."""
     nmea2000Message = NMEA2000Message(65005, 'utilityTotalAcEnergy', 'Utility Total AC Energy')
     running_bit_offset = 0
-    # 1:total_energy_export | Offset: 0, Length: 32, Signed: False Resolution: 3600000.0, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 1:total_energy_export | Offset: 0, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
-    total_energy_export = total_energy_export_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 3600000.0)
-    nmea2000Message.fields.append(NMEA2000Field('totalEnergyExport', 'Total Energy Export', None, 'J', total_energy_export, total_energy_export_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
+    total_energy_export = total_energy_export_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('totalEnergyExport', 'Total Energy Export', None, 'kWh', total_energy_export, total_energy_export_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
     running_bit_offset += 32
 
-    # 2:total_energy_import | Offset: 32, Length: 32, Signed: False Resolution: 3600000.0, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 2:total_energy_import | Offset: 32, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
-    total_energy_import = total_energy_import_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 3600000.0)
-    nmea2000Message.fields.append(NMEA2000Field('totalEnergyImport', 'Total Energy Import', None, 'J', total_energy_import, total_energy_import_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
+    total_energy_import = total_energy_import_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('totalEnergyImport', 'Total Energy Import', None, 'kWh', total_energy_import, total_energy_import_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
     running_bit_offset += 32
 
     return nmea2000Message
@@ -7433,17 +7563,17 @@ def decode_pgn_65005(_data_raw_: int) -> NMEA2000Message:
 def encode_pgn_65005(nmea2000Message: NMEA2000Message) -> int:
     """Encode Nmea2000Message object to binary data for PGN 65005."""
     data_raw = 0
-    # totalEnergyExport | Offset: 0, Length: 32, Resolution: 3600000.0, Field Type: NUMBER
+    # totalEnergyExport | Offset: 0, Length: 32, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'totalEnergyExport')
     if field is None:
         raise Exception("Cant encode this message, missing 'Total Energy Export'")
-    field_value = encode_number(field.value, 32, False, 3600000.0)
+    field_value = encode_number(field.value, 32, False, 1)
     data_raw |= (field_value & 0xFFFFFFFF) << 0
-    # totalEnergyImport | Offset: 32, Length: 32, Resolution: 3600000.0, Field Type: NUMBER
+    # totalEnergyImport | Offset: 32, Length: 32, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'totalEnergyImport')
     if field is None:
         raise Exception("Cant encode this message, missing 'Total Energy Import'")
-    field_value = encode_number(field.value, 32, False, 3600000.0)
+    field_value = encode_number(field.value, 32, False, 1)
     data_raw |= (field_value & 0xFFFFFFFF) << 32
     return data_raw
 
@@ -8119,16 +8249,16 @@ def decode_pgn_65018(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65018."""
     nmea2000Message = NMEA2000Message(65018, 'generatorTotalAcEnergy', 'Generator Total AC Energy')
     running_bit_offset = 0
-    # 1:total_energy_export | Offset: 0, Length: 32, Signed: False Resolution: 3600000.0, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 1:total_energy_export | Offset: 0, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
-    total_energy_export = total_energy_export_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 3600000.0)
-    nmea2000Message.fields.append(NMEA2000Field('totalEnergyExport', 'Total Energy Export', None, 'J', total_energy_export, total_energy_export_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
+    total_energy_export = total_energy_export_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('totalEnergyExport', 'Total Energy Export', None, 'kWh', total_energy_export, total_energy_export_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
     running_bit_offset += 32
 
-    # 2:total_energy_import | Offset: 32, Length: 32, Signed: False Resolution: 3600000.0, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 2:total_energy_import | Offset: 32, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
-    total_energy_import = total_energy_import_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 3600000.0)
-    nmea2000Message.fields.append(NMEA2000Field('totalEnergyImport', 'Total Energy Import', None, 'J', total_energy_import, total_energy_import_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
+    total_energy_import = total_energy_import_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('totalEnergyImport', 'Total Energy Import', None, 'kWh', total_energy_import, total_energy_import_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
     running_bit_offset += 32
 
     return nmea2000Message
@@ -8136,17 +8266,17 @@ def decode_pgn_65018(_data_raw_: int) -> NMEA2000Message:
 def encode_pgn_65018(nmea2000Message: NMEA2000Message) -> int:
     """Encode Nmea2000Message object to binary data for PGN 65018."""
     data_raw = 0
-    # totalEnergyExport | Offset: 0, Length: 32, Resolution: 3600000.0, Field Type: NUMBER
+    # totalEnergyExport | Offset: 0, Length: 32, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'totalEnergyExport')
     if field is None:
         raise Exception("Cant encode this message, missing 'Total Energy Export'")
-    field_value = encode_number(field.value, 32, False, 3600000.0)
+    field_value = encode_number(field.value, 32, False, 1)
     data_raw |= (field_value & 0xFFFFFFFF) << 0
-    # totalEnergyImport | Offset: 32, Length: 32, Resolution: 3600000.0, Field Type: NUMBER
+    # totalEnergyImport | Offset: 32, Length: 32, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'totalEnergyImport')
     if field is None:
         raise Exception("Cant encode this message, missing 'Total Energy Import'")
-    field_value = encode_number(field.value, 32, False, 3600000.0)
+    field_value = encode_number(field.value, 32, False, 1)
     data_raw |= (field_value & 0xFFFFFFFF) << 32
     return data_raw
 
@@ -8829,23 +8959,23 @@ def decode_pgn_65240(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('uniqueNumber', 'Unique Number', "ISO Identity Number", None, unique_number, unique_number_raw, None, FieldTypes.BINARY, False))
     running_bit_offset += 21
 
-    # 2:manufacturer_code | Offset: 21, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 2:manufacturer_code | Offset: 21, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 21
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, 'Manufacturer Code', manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
-    # 3:device_instance_lower | Offset: 32, Length: 3, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 3:device_instance_lower | Offset: 32, Length: 3, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     device_instance_lower = device_instance_lower_raw = decode_number(_data_raw_, running_bit_offset, 3, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceLower', 'Device Instance Lower', "ISO ECU Instance", None, device_instance_lower, device_instance_lower_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceLower', 'Device Instance Lower', "ISO ECU Instance", None, device_instance_lower, device_instance_lower_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 3
 
-    # 4:device_instance_upper | Offset: 35, Length: 5, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 4:device_instance_upper | Offset: 35, Length: 5, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 35
     device_instance_upper = device_instance_upper_raw = decode_number(_data_raw_, running_bit_offset, 5, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceUpper', 'Device Instance Upper', "ISO Function Instance", None, device_instance_upper, device_instance_upper_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('deviceInstanceUpper', 'Device Instance Upper', "ISO Function Instance", None, device_instance_upper, device_instance_upper_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 5
 
     # 5:device_function | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: INDIRECT_LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -8871,10 +9001,10 @@ def decode_pgn_65240(_data_raw_: int) -> NMEA2000Message:
     device_function = master_indirect_lookup_dict['DEVICE_FUNCTION'].get(combined_key, None)
     nmea2000Message.fields[4].value = device_function
 
-    # 8:system_instance | Offset: 56, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 8:system_instance | Offset: 56, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 56
     system_instance = system_instance_raw = decode_number(_data_raw_, running_bit_offset, 4, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('systemInstance', 'System Instance', "ISO Device Class Instance", None, system_instance, system_instance_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('systemInstance', 'System Instance', "ISO Device Class Instance", None, system_instance, system_instance_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 4
 
     # 9:industry_code | Offset: 60, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -8988,11 +9118,11 @@ def decode_pgn_65280_0xff000xffffManufacturerProprietarySingleFrameNonAddressed(
     """Decode PGN 65280."""
     nmea2000Message = NMEA2000Message(65280, '0xff000xffffManufacturerProprietarySingleFrameNonAddressed', '0xFF00-0xFFFF: Manufacturer Proprietary single-frame non-addressed')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9001,11 +9131,11 @@ def decode_pgn_65280_0xff000xffffManufacturerProprietarySingleFrameNonAddressed(
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:data | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -9049,11 +9179,11 @@ def decode_pgn_65280_furunoHeave(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65280."""
     nmea2000Message = NMEA2000Message(65280, 'furunoHeave', 'Furuno: Heave')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9062,11 +9192,11 @@ def decode_pgn_65280_furunoHeave(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:heave | Offset: 16, Length: 32, Signed: True Resolution: 0.001, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -9126,11 +9256,11 @@ def decode_pgn_65284(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65284."""
     nmea2000Message = NMEA2000Message(65284, 'maretronProprietaryDcBreakerCurrent', 'Maretron: Proprietary DC Breaker Current')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9139,11 +9269,11 @@ def decode_pgn_65284(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:bank_instance | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -9246,11 +9376,11 @@ def decode_pgn_65285_airmarBootStateAcknowledgment(_data_raw_: int) -> NMEA2000M
     """Decode PGN 65285."""
     nmea2000Message = NMEA2000Message(65285, 'airmarBootStateAcknowledgment', 'Airmar: Boot State Acknowledgment')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9259,11 +9389,11 @@ def decode_pgn_65285_airmarBootStateAcknowledgment(_data_raw_: int) -> NMEA2000M
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:boot_state | Offset: 16, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -9320,11 +9450,11 @@ def decode_pgn_65285_lowranceTemperature(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65285."""
     nmea2000Message = NMEA2000Message(65285, 'lowranceTemperature', 'Lowrance: Temperature')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 140, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 140, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Lowrance", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Lowrance", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9333,18 +9463,18 @@ def decode_pgn_65285_lowranceTemperature(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:temperature_source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 4:temperature_source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     temperature_source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     temperature_source = master_dict['TEMPERATURE_SOURCE'].get(temperature_source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('temperatureSource', 'Temperature Source', None, None, temperature_source, temperature_source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('temperatureSource', 'Temperature Source', None, None, temperature_source, temperature_source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:actual_temperature | Offset: 24, Length: 16, Signed: False Resolution: 0.01, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -9429,11 +9559,11 @@ def decode_pgn_65286_chetcoDimmer(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65286."""
     nmea2000Message = NMEA2000Message(65286, 'chetcoDimmer', 'Chetco: Dimmer')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 409, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 409, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Chetco", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Chetco", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9442,11 +9572,11 @@ def decode_pgn_65286_chetcoDimmer(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:instance | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -9550,11 +9680,11 @@ def decode_pgn_65286_airmarBootStateRequest(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65286."""
     nmea2000Message = NMEA2000Message(65286, 'airmarBootStateRequest', 'Airmar: Boot State Request')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9563,11 +9693,11 @@ def decode_pgn_65286_airmarBootStateRequest(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9634,11 +9764,11 @@ def decode_pgn_65287_airmarAccessLevel(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65287."""
     nmea2000Message = NMEA2000Message(65287, 'airmarAccessLevel', 'Airmar: Access Level')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9647,11 +9777,11 @@ def decode_pgn_65287_airmarAccessLevel(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:format_code | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -9732,11 +9862,11 @@ def decode_pgn_65287_simnetConfigureTemperatureSensor(_data_raw_: int) -> NMEA20
     """Decode PGN 65287."""
     nmea2000Message = NMEA2000Message(65287, 'simnetConfigureTemperatureSensor', 'Simnet: Configure Temperature Sensor')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9745,11 +9875,11 @@ def decode_pgn_65287_simnetConfigureTemperatureSensor(_data_raw_: int) -> NMEA20
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9797,11 +9927,11 @@ def decode_pgn_65288(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65288."""
     nmea2000Message = NMEA2000Message(65288, 'seatalkAlarm', 'Seatalk: Alarm')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9810,11 +9940,11 @@ def decode_pgn_65288(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -9913,11 +10043,11 @@ def decode_pgn_65289(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65289."""
     nmea2000Message = NMEA2000Message(65289, 'simnetTrimTabSensorCalibration', 'Simnet: Trim Tab Sensor Calibration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9926,11 +10056,11 @@ def decode_pgn_65289(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9978,11 +10108,11 @@ def decode_pgn_65290(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65290."""
     nmea2000Message = NMEA2000Message(65290, 'simnetPaddleWheelSpeedConfiguration', 'Simnet: Paddle Wheel Speed Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -9991,11 +10121,11 @@ def decode_pgn_65290(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10043,11 +10173,11 @@ def decode_pgn_65292(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65292."""
     nmea2000Message = NMEA2000Message(65292, 'simnetClearFluidLevelWarnings', 'Simnet: Clear Fluid Level Warnings')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10056,11 +10186,11 @@ def decode_pgn_65292(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10127,11 +10257,11 @@ def decode_pgn_65293_simnetLgc2000Configuration(_data_raw_: int) -> NMEA2000Mess
     """Decode PGN 65293."""
     nmea2000Message = NMEA2000Message(65293, 'simnetLgc2000Configuration', 'Simnet: LGC-2000 Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10140,11 +10270,11 @@ def decode_pgn_65293_simnetLgc2000Configuration(_data_raw_: int) -> NMEA2000Mess
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10188,11 +10318,11 @@ def decode_pgn_65293_diverseYachtServicesLoadCell(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 65293."""
     nmea2000Message = NMEA2000Message(65293, 'diverseYachtServicesLoadCell', 'Diverse Yacht Services: Load Cell')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 641, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 641, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Diverse Yacht Services", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Diverse Yacht Services", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10201,11 +10331,11 @@ def decode_pgn_65293_diverseYachtServicesLoadCell(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:instance | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -10277,11 +10407,11 @@ def decode_pgn_65302(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65302."""
     nmea2000Message = NMEA2000Message(65302, 'simnetApUnknown1', 'Simnet: AP Unknown 1')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10290,11 +10420,11 @@ def decode_pgn_65302(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -10435,11 +10565,11 @@ def decode_pgn_65305_simnetDeviceStatus(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65305."""
     nmea2000Message = NMEA2000Message(65305, 'simnetDeviceStatus', 'Simnet: Device Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10448,11 +10578,11 @@ def decode_pgn_65305_simnetDeviceStatus(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:model | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -10535,11 +10665,11 @@ def decode_pgn_65305_simnetDeviceStatusRequest(_data_raw_: int) -> NMEA2000Messa
     """Decode PGN 65305."""
     nmea2000Message = NMEA2000Message(65305, 'simnetDeviceStatusRequest', 'Simnet: Device Status Request')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10548,11 +10678,11 @@ def decode_pgn_65305_simnetDeviceStatusRequest(_data_raw_: int) -> NMEA2000Messa
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:model | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -10622,11 +10752,11 @@ def decode_pgn_65305_simnetPilotMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65305."""
     nmea2000Message = NMEA2000Message(65305, 'simnetPilotMode', 'Simnet: Pilot Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10635,11 +10765,11 @@ def decode_pgn_65305_simnetPilotMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:model | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -10722,11 +10852,11 @@ def decode_pgn_65305_simnetDeviceModeRequest(_data_raw_: int) -> NMEA2000Message
     """Decode PGN 65305."""
     nmea2000Message = NMEA2000Message(65305, 'simnetDeviceModeRequest', 'Simnet: Device Mode Request')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10735,11 +10865,11 @@ def decode_pgn_65305_simnetDeviceModeRequest(_data_raw_: int) -> NMEA2000Message
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:model | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -10809,11 +10939,11 @@ def decode_pgn_65305_simnetSailingProcessorStatus(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 65305."""
     nmea2000Message = NMEA2000Message(65305, 'simnetSailingProcessorStatus', 'Simnet: Sailing Processor Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10822,11 +10952,11 @@ def decode_pgn_65305_simnetSailingProcessorStatus(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:model | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -10900,11 +11030,11 @@ def decode_pgn_65309(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65309."""
     nmea2000Message = NMEA2000Message(65309, 'navicoWirelessBatteryStatus', 'Navico: Wireless Battery Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -10913,11 +11043,11 @@ def decode_pgn_65309(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:status | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -11001,11 +11131,11 @@ def decode_pgn_65312(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65312."""
     nmea2000Message = NMEA2000Message(65312, 'navicoWirelessSignalStatus', 'Navico: Wireless Signal Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11014,11 +11144,11 @@ def decode_pgn_65312(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:unknown | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -11090,11 +11220,11 @@ def decode_pgn_65340(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65340."""
     nmea2000Message = NMEA2000Message(65340, 'simnetApUnknown2', 'Simnet: AP Unknown 2')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11103,11 +11233,11 @@ def decode_pgn_65340(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -11215,11 +11345,11 @@ def decode_pgn_65341(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65341."""
     nmea2000Message = NMEA2000Message(65341, 'simnetAutopilotAngle', 'Simnet: Autopilot Angle')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11228,11 +11358,11 @@ def decode_pgn_65341(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11317,11 +11447,11 @@ def decode_pgn_65345(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65345."""
     nmea2000Message = NMEA2000Message(65345, 'seatalkPilotWindDatum', 'Seatalk: Pilot Wind Datum')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11330,11 +11460,11 @@ def decode_pgn_65345(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:wind_datum | Offset: 16, Length: 16, Signed: False Resolution: 0.0001, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -11481,11 +11611,11 @@ def decode_pgn_65359(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65359."""
     nmea2000Message = NMEA2000Message(65359, 'seatalkPilotHeading', 'Seatalk: Pilot Heading')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11494,11 +11624,11 @@ def decode_pgn_65359(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -11582,11 +11712,11 @@ def decode_pgn_65360(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65360."""
     nmea2000Message = NMEA2000Message(65360, 'seatalkPilotLockedHeading', 'Seatalk: Pilot Locked Heading')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11595,11 +11725,11 @@ def decode_pgn_65360(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -11683,11 +11813,11 @@ def decode_pgn_65361(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65361."""
     nmea2000Message = NMEA2000Message(65361, 'seatalkSilenceAlarm', 'Seatalk: Silence Alarm')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11696,11 +11826,11 @@ def decode_pgn_65361(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:alarm_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -11774,11 +11904,11 @@ def decode_pgn_65371(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65371."""
     nmea2000Message = NMEA2000Message(65371, 'seatalkKeypadMessage', 'Seatalk: Keypad Message')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11787,11 +11917,11 @@ def decode_pgn_65371(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -11923,11 +12053,11 @@ def decode_pgn_65374(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65374."""
     nmea2000Message = NMEA2000Message(65374, 'seatalkKeypadHeartbeat', 'SeaTalk: Keypad Heartbeat')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -11936,11 +12066,11 @@ def decode_pgn_65374(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -12024,11 +12154,11 @@ def decode_pgn_65379(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65379."""
     nmea2000Message = NMEA2000Message(65379, 'seatalkPilotMode', 'Seatalk: Pilot Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12037,11 +12167,11 @@ def decode_pgn_65379(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:pilot_mode | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -12126,11 +12256,11 @@ def decode_pgn_65408(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65408."""
     nmea2000Message = NMEA2000Message(65408, 'airmarDepthQualityFactor', 'Airmar: Depth Quality Factor')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12139,11 +12269,11 @@ def decode_pgn_65408(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -12216,11 +12346,11 @@ def decode_pgn_65409(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65409."""
     nmea2000Message = NMEA2000Message(65409, 'airmarSpeedPulseCount', 'Airmar: Speed Pulse Count')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12229,11 +12359,11 @@ def decode_pgn_65409(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -12317,11 +12447,11 @@ def decode_pgn_65410(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65410."""
     nmea2000Message = NMEA2000Message(65410, 'airmarDeviceInformation', 'Airmar: Device Information')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12330,11 +12460,11 @@ def decode_pgn_65410(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -12418,11 +12548,11 @@ def decode_pgn_65420(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65420."""
     nmea2000Message = NMEA2000Message(65420, 'simnetApUnknown3', 'Simnet: AP Unknown 3')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12431,11 +12561,11 @@ def decode_pgn_65420(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -12543,11 +12673,11 @@ def decode_pgn_65480(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 65480."""
     nmea2000Message = NMEA2000Message(65480, 'simnetAutopilotMode', 'Simnet: Autopilot Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12556,11 +12686,11 @@ def decode_pgn_65480(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12960,11 +13090,11 @@ def decode_pgn_126208_nmeaReadFieldsGroupFunction(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('pgn', 'PGN', "Commanded PGN", None, pgn, pgn_raw, None, FieldTypes.PGN, False))
     running_bit_offset += 24
 
-    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 4:reserved_ | Offset: , Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -12972,10 +13102,10 @@ def decode_pgn_126208_nmeaReadFieldsGroupFunction(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_', 'Reserved', "Only in PGN when Commanded PGN is proprietary", None, reserved_, reserved__raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 6:unique_id | Offset: , Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -13058,11 +13188,11 @@ def decode_pgn_126208_nmeaReadFieldsReplyGroupFunction(_data_raw_: int) -> NMEA2
     nmea2000Message.fields.append(NMEA2000Field('pgn', 'PGN', "Commanded PGN", None, pgn, pgn_raw, None, FieldTypes.PGN, False))
     running_bit_offset += 24
 
-    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 4:reserved_ | Offset: , Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13070,10 +13200,10 @@ def decode_pgn_126208_nmeaReadFieldsReplyGroupFunction(_data_raw_: int) -> NMEA2
     nmea2000Message.fields.append(NMEA2000Field('reserved_', 'Reserved', "Only in PGN when Commanded PGN is proprietary", None, reserved_, reserved__raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 6:unique_id | Offset: , Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -13162,11 +13292,11 @@ def decode_pgn_126208_nmeaWriteFieldsGroupFunction(_data_raw_: int) -> NMEA2000M
     nmea2000Message.fields.append(NMEA2000Field('pgn', 'PGN', "Commanded PGN", None, pgn, pgn_raw, None, FieldTypes.PGN, False))
     running_bit_offset += 24
 
-    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 4:reserved_ | Offset: , Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13174,10 +13304,10 @@ def decode_pgn_126208_nmeaWriteFieldsGroupFunction(_data_raw_: int) -> NMEA2000M
     nmea2000Message.fields.append(NMEA2000Field('reserved_', 'Reserved', "Only in PGN when Commanded PGN is proprietary", None, reserved_, reserved__raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 6:unique_id | Offset: , Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -13266,11 +13396,11 @@ def decode_pgn_126208_nmeaWriteFieldsReplyGroupFunction(_data_raw_: int) -> NMEA
     nmea2000Message.fields.append(NMEA2000Field('pgn', 'PGN', "Commanded PGN", None, pgn, pgn_raw, None, FieldTypes.PGN, False))
     running_bit_offset += 24
 
-    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:manufacturer_code | Offset: 32, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Only in PGN when Commanded PGN is proprietary", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 4:reserved_ | Offset: , Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13278,10 +13408,10 @@ def decode_pgn_126208_nmeaWriteFieldsReplyGroupFunction(_data_raw_: int) -> NMEA
     nmea2000Message.fields.append(NMEA2000Field('reserved_', 'Reserved', "Only in PGN when Commanded PGN is proprietary", None, reserved_, reserved__raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 5:industry_code | Offset: , Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Only in PGN when Commanded PGN is proprietary", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 6:unique_id | Offset: , Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -13397,7 +13527,7 @@ def encode_pgn_126464(nmea2000Message: NMEA2000Message) -> int:
 def is_fast_pgn_126720() -> bool:
     """Return True if PGN 126720 is a fast PGN."""
     return True
-# Complex PGN. number of matches: 30
+# Complex PGN. number of matches: 33
 def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     # seatalk1PilotMode | Description: Seatalk1: Pilot Mode
     if (
@@ -13408,11 +13538,20 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
         ):
         return decode_pgn_126720_seatalk1PilotMode(data_raw)
     
+    # seatalk1PilotHullType | Description: Seatalk1: Pilot Hull Type
+    if (
+        (((data_raw >> 0) & 0x7FF) == 1851) and
+        (((data_raw >> 13) & 0x7) == 4) and
+        (((data_raw >> 16) & 0xFFFF) == 5740) and
+        (((data_raw >> 32) & 0xFF) == 80)
+        ):
+        return decode_pgn_126720_seatalk1PilotHullType(data_raw)
+    
     # fusionMediaControl | Description: Fusion: Media Control
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 3)
+        (((data_raw >> 16) & 0xFFFF) == 3)
         ):
         return decode_pgn_126720_fusionMediaControl(data_raw)
     
@@ -13420,7 +13559,7 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 30)
+        (((data_raw >> 16) & 0xFFFF) == 30)
         ):
         return decode_pgn_126720_fusionSiriusControl(data_raw)
     
@@ -13428,7 +13567,7 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 1)
+        (((data_raw >> 16) & 0xFFFF) == 1)
         ):
         return decode_pgn_126720_fusionRequestStatus(data_raw)
     
@@ -13436,7 +13575,7 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 2)
+        (((data_raw >> 16) & 0xFFFF) == 2)
         ):
         return decode_pgn_126720_fusionSetSource(data_raw)
     
@@ -13444,7 +13583,7 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 23)
+        (((data_raw >> 16) & 0xFFFF) == 17)
         ):
         return decode_pgn_126720_fusionSetMute(data_raw)
     
@@ -13452,7 +13591,7 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 24)
+        (((data_raw >> 16) & 0xFFFF) == 24)
         ):
         return decode_pgn_126720_fusionSetZoneVolume(data_raw)
     
@@ -13460,9 +13599,17 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
     if (
         (((data_raw >> 0) & 0x7FF) == 419) and
         (((data_raw >> 13) & 0x7) == 4) and
-        (((data_raw >> 16) & 0xFF) == 25)
+        (((data_raw >> 16) & 0xFFFF) == 25)
         ):
         return decode_pgn_126720_fusionSetAllVolumes(data_raw)
+    
+    # fusionSetPower | Description: Fusion: Set Power 
+    if (
+        (((data_raw >> 0) & 0x7FF) == 419) and
+        (((data_raw >> 13) & 0x7) == 4) and
+        (((data_raw >> 16) & 0xFFFF) == 28)
+        ):
+        return decode_pgn_126720_fusionSetPower(data_raw)
     
     # seatalk1Keystroke | Description: Seatalk1: Keystroke
     if (
@@ -13607,6 +13754,15 @@ def decode_pgn_126720(data_raw: int) -> NMEA2000Message:
         ):
         return decode_pgn_126720_airmarAddressableMultiFrame(data_raw)
     
+    # maretronDeviationCalibrationResponse | Description: Maretron: Deviation Calibration Response
+    if (
+        (((data_raw >> 0) & 0x7FF) == 137) and
+        (((data_raw >> 13) & 0x7) == 4) and
+        (((data_raw >> 32) & 0xFFFF) == 1) and
+        (((data_raw >> 48) & 0xFF) == 80)
+        ):
+        return decode_pgn_126720_maretronDeviationCalibrationResponse(data_raw)
+    
     # maretronSlaveResponse | Description: Maretron: Slave Response
     if (
         (((data_raw >> 0) & 0x7FF) == 137) and
@@ -13656,11 +13812,11 @@ def decode_pgn_126720_0x1ef00ManufacturerProprietaryFastPacketAddressed(_data_ra
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, '0x1ef00ManufacturerProprietaryFastPacketAddressed', '0x1EF00: Manufacturer Proprietary fast-packet addressed')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', None, None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13669,11 +13825,11 @@ def decode_pgn_126720_0x1ef00ManufacturerProprietaryFastPacketAddressed(_data_ra
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', None, None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:data | Offset: 16, Length: 1768, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -13717,11 +13873,11 @@ def decode_pgn_126720_seatalk1PilotMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'seatalk1PilotMode', 'Seatalk1: Pilot Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13730,11 +13886,11 @@ def decode_pgn_126720_seatalk1PilotMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: 33264, PartOfPrimaryKey: True,
@@ -13847,15 +14003,15 @@ def encode_pgn_126720_seatalk1PilotMode(nmea2000Message: NMEA2000Message) -> int
     data_raw |= (field_value & 0xFFFFFFFFFFFFFFFFFFFF) << 88
     return data_raw
 
-def decode_pgn_126720_fusionMediaControl(_data_raw_: int) -> NMEA2000Message:
+def decode_pgn_126720_seatalk1PilotHullType(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
-    nmea2000Message = NMEA2000Message(126720, 'fusionMediaControl', 'Fusion: Media Control')
+    nmea2000Message = NMEA2000Message(126720, 'seatalk1PilotHullType', 'Seatalk1: Pilot Hull Type')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13864,32 +14020,125 @@ def decode_pgn_126720_fusionMediaControl(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 3, PartOfPrimaryKey: True,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: 5740, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id = proprietary_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Media Control", None, proprietary_id, proprietary_id_raw, None, FieldTypes.NUMBER, True))
+    proprietary_id = proprietary_id_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "0x166C", None, proprietary_id, proprietary_id_raw, None, FieldTypes.NUMBER, True))
+    running_bit_offset += 16
+
+    # 5:command | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 80, PartOfPrimaryKey: ,
+    running_bit_offset = 32
+    command = command_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('command', 'command', "0x50", None, command, command_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 5:unknown | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    unknown = unknown_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.NUMBER, False))
+    # 6:hull_type | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 40
+    hull_type_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    hull_type = master_dict['SEATALK_PILOT_HULL_TYPE'].get(hull_type_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('hullType', 'Hull Type', None, None, hull_type, hull_type_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 8
 
-    # 6:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 7:unknown | Offset: 48, Length: 56, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    unknown = unknown_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 56))
+    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.BINARY, False))
+    running_bit_offset += 56
+
+    return nmea2000Message
+
+def encode_pgn_126720_seatalk1PilotHullType(nmea2000Message: NMEA2000Message) -> int:
+    """Encode Nmea2000Message object to binary data for PGN 126720."""
+    data_raw = 0
+    # manufacturerCode | Offset: 0, Length: 11, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'manufacturerCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Manufacturer Code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MANUFACTURER_CODE(field.value)
+    data_raw |= (field_value & 0x7FF) << 0
+    # reserved_11 | Offset: 11, Length: 2, Resolution: 1, Field Type: RESERVED
+    field = next(f for f in nmea2000Message.fields if f.id == 'reserved_11')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Reserved'")
+    field_value = field.value
+    data_raw |= (field_value & 0x3) << 11
+    # industryCode | Offset: 13, Length: 3, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'industryCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Industry Code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
+    data_raw |= (field_value & 0x7) << 13
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: NUMBER
+    field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Proprietary ID'")
+    field_value = encode_number(field.value, 16, False, 1)
+    data_raw |= (field_value & 0xFFFF) << 16
+    # command | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
+    field = next(f for f in nmea2000Message.fields if f.id == 'command')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'command'")
+    field_value = encode_number(field.value, 8, False, 1)
+    data_raw |= (field_value & 0xFF) << 32
+    # hullType | Offset: 40, Length: 8, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'hullType')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Hull Type'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_SEATALK_PILOT_HULL_TYPE(field.value)
+    data_raw |= (field_value & 0xFF) << 40
+    # unknown | Offset: 48, Length: 56, Resolution: 1, Field Type: BINARY
+    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Unknown'")
+    raise Exception("Encoding 'BINARY' not supported")
+    data_raw |= (field_value & 0xFFFFFFFFFFFFFF) << 48
+    return data_raw
+
+def decode_pgn_126720_fusionMediaControl(_data_raw_: int) -> NMEA2000Message:
+    """Decode PGN 126720."""
+    nmea2000Message = NMEA2000Message(126720, 'fusionMediaControl', 'Fusion: Media Control')
+    running_bit_offset = 0
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
+    running_bit_offset = 0
+    manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
+    manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 11
+
+    # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 11
+    reserved_11 = reserved_11_raw = decode_int(_data_raw_, running_bit_offset, 2)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 2
+
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
+    running_bit_offset = 13
+    industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
+    industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 3
+
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 3, PartOfPrimaryKey: True,
+    running_bit_offset = 16
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
+    proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Media Command", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
+
+    # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     source_id = source_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('sourceId', 'Source ID', None, None, source_id, source_id_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 7:command | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 6:command | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 40
     command_raw = decode_int(_data_raw_, running_bit_offset, 8)
     command = master_dict['FUSION_COMMAND'].get(command_raw, None)
@@ -13919,18 +14168,12 @@ def encode_pgn_126720_fusionMediaControl(nmea2000Message: NMEA2000Message) -> in
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 16
-    # unknown | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
-    if field is None:
-        raise Exception("Cant encode this message, missing 'Unknown'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 24
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
+    data_raw |= (field_value & 0xFFFF) << 16
     # sourceId | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'sourceId')
     if field is None:
@@ -13949,11 +14192,11 @@ def decode_pgn_126720_fusionSiriusControl(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'fusionSiriusControl', 'Fusion: Sirius Control')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -13962,37 +14205,38 @@ def decode_pgn_126720_fusionSiriusControl(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 30, PartOfPrimaryKey: True,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 30, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id = proprietary_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Sirius Control", None, proprietary_id, proprietary_id_raw, None, FieldTypes.NUMBER, True))
-    running_bit_offset += 8
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
+    proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Send Sirius Command", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
 
-    # 5:unknown | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    unknown = unknown_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
-
-    # 6:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     source_id = source_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('sourceId', 'Source ID', None, None, source_id, source_id_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 7:command | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 6:command | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 40
     command_raw = decode_int(_data_raw_, running_bit_offset, 8)
     command = master_dict['FUSION_SIRIUS_COMMAND'].get(command_raw, None)
     nmea2000Message.fields.append(NMEA2000Field('command', 'Command', None, None, command, command_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 8
+
+    # 7:data | Offset: 48, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    data = data_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('data', 'Data', None, None, data, data_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
 
     return nmea2000Message
 
@@ -14017,18 +14261,12 @@ def encode_pgn_126720_fusionSiriusControl(nmea2000Message: NMEA2000Message) -> i
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 16
-    # unknown | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
-    if field is None:
-        raise Exception("Cant encode this message, missing 'Unknown'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 24
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
+    data_raw |= (field_value & 0xFFFF) << 16
     # sourceId | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'sourceId')
     if field is None:
@@ -14041,17 +14279,23 @@ def encode_pgn_126720_fusionSiriusControl(nmea2000Message: NMEA2000Message) -> i
         raise Exception("Cant encode this message, missing 'Command'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_SIRIUS_COMMAND(field.value)
     data_raw |= (field_value & 0xFF) << 40
+    # data | Offset: 48, Length: 16, Resolution: 1, Field Type: NUMBER
+    field = next(f for f in nmea2000Message.fields if f.id == 'data')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Data'")
+    field_value = encode_number(field.value, 16, False, 1)
+    data_raw |= (field_value & 0xFFFF) << 48
     return data_raw
 
 def decode_pgn_126720_fusionRequestStatus(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'fusionRequestStatus', 'Fusion: Request Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14060,25 +14304,19 @@ def decode_pgn_126720_fusionRequestStatus(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Request Status", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
-    running_bit_offset += 8
-
-    # 5:unknown | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    unknown = unknown_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Request Status", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
 
     return nmea2000Message
 
@@ -14103,29 +14341,23 @@ def encode_pgn_126720_fusionRequestStatus(nmea2000Message: NMEA2000Message) -> i
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: LOOKUP
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
-    data_raw |= (field_value & 0xFF) << 16
-    # unknown | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
-    if field is None:
-        raise Exception("Cant encode this message, missing 'Unknown'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 24
+    data_raw |= (field_value & 0xFFFF) << 16
     return data_raw
 
 def decode_pgn_126720_fusionSetSource(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'fusionSetSource', 'Fusion: Set Source')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14134,27 +14366,21 @@ def decode_pgn_126720_fusionSetSource(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 2, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 2, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Source", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
-    running_bit_offset += 8
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Set Source", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
 
-    # 5:unknown | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    unknown = unknown_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
-
-    # 6:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     source_id = source_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('sourceId', 'Source ID', None, None, source_id, source_id_raw, None, FieldTypes.NUMBER, False))
@@ -14183,18 +14409,12 @@ def encode_pgn_126720_fusionSetSource(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: LOOKUP
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
-    data_raw |= (field_value & 0xFF) << 16
-    # unknown | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
-    if field is None:
-        raise Exception("Cant encode this message, missing 'Unknown'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 24
+    data_raw |= (field_value & 0xFFFF) << 16
     # sourceId | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'sourceId')
     if field is None:
@@ -14207,11 +14427,11 @@ def decode_pgn_126720_fusionSetMute(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'fusionSetMute', 'Fusion: Set Mute')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14220,22 +14440,22 @@ def decode_pgn_126720_fusionSetMute(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 23, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 17, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "None", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
-    running_bit_offset += 8
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Set Mute", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
 
-    # 5:command | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
+    # 5:command | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 32
     command_raw = decode_int(_data_raw_, running_bit_offset, 8)
     command = master_dict['FUSION_MUTE_COMMAND'].get(command_raw, None)
     nmea2000Message.fields.append(NMEA2000Field('command', 'Command', None, None, command, command_raw, None, FieldTypes.LOOKUP, False))
@@ -14264,29 +14484,29 @@ def encode_pgn_126720_fusionSetMute(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: LOOKUP
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
-    data_raw |= (field_value & 0xFF) << 16
-    # command | Offset: 24, Length: 8, Resolution: 1, Field Type: LOOKUP
+    data_raw |= (field_value & 0xFFFF) << 16
+    # command | Offset: 32, Length: 8, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'command')
     if field is None:
         raise Exception("Cant encode this message, missing 'Command'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MUTE_COMMAND(field.value)
-    data_raw |= (field_value & 0xFF) << 24
+    data_raw |= (field_value & 0xFF) << 32
     return data_raw
 
 def decode_pgn_126720_fusionSetZoneVolume(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'fusionSetZoneVolume', 'Fusion: Set Zone Volume')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14295,33 +14515,27 @@ def decode_pgn_126720_fusionSetZoneVolume(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 24, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 24, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Set Zone Volume", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
-    running_bit_offset += 8
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Set Zone Volume", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
 
-    # 5:unknown | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    unknown = unknown_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
-
-    # 6:zone | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:zone | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     zone = zone_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('zone', 'Zone', None, None, zone, zone_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 7:volume | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 6:volume | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 40
     volume = volume_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('volume', 'Volume', None, None, volume, volume_raw, None, FieldTypes.NUMBER, False))
@@ -14350,18 +14564,12 @@ def encode_pgn_126720_fusionSetZoneVolume(nmea2000Message: NMEA2000Message) -> i
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: LOOKUP
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
-    data_raw |= (field_value & 0xFF) << 16
-    # unknown | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
-    if field is None:
-        raise Exception("Cant encode this message, missing 'Unknown'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 24
+    data_raw |= (field_value & 0xFFFF) << 16
     # zone | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'zone')
     if field is None:
@@ -14380,11 +14588,11 @@ def decode_pgn_126720_fusionSetAllVolumes(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'fusionSetAllVolumes', 'Fusion: Set All Volumes')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14393,45 +14601,39 @@ def decode_pgn_126720_fusionSetAllVolumes(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 25, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 25, PartOfPrimaryKey: True,
     running_bit_offset = 16
-    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Set All Volumes", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
-    running_bit_offset += 8
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Set All Volumes", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
 
-    # 5:unknown | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    unknown = unknown_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('unknown', 'Unknown', None, None, unknown, unknown_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
-
-    # 6:zone1 | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:zone1 | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     zone1 = zone1_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('zone1', 'Zone1', None, None, zone1, zone1_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 7:zone2 | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 6:zone2 | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 40
     zone2 = zone2_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('zone2', 'Zone2', None, None, zone2, zone2_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 8:zone3 | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 7:zone3 | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 48
     zone3 = zone3_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('zone3', 'Zone3', None, None, zone3, zone3_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 9:zone4 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 8:zone4 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 56
     zone4 = zone4_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
     nmea2000Message.fields.append(NMEA2000Field('zone4', 'Zone4', None, None, zone4, zone4_raw, None, FieldTypes.NUMBER, False))
@@ -14460,18 +14662,12 @@ def encode_pgn_126720_fusionSetAllVolumes(nmea2000Message: NMEA2000Message) -> i
         raise Exception("Cant encode this message, missing 'Industry Code'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
     data_raw |= (field_value & 0x7) << 13
-    # proprietaryId | Offset: 16, Length: 8, Resolution: 1, Field Type: LOOKUP
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Proprietary ID'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
-    data_raw |= (field_value & 0xFF) << 16
-    # unknown | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    field = next(f for f in nmea2000Message.fields if f.id == 'unknown')
-    if field is None:
-        raise Exception("Cant encode this message, missing 'Unknown'")
-    field_value = encode_number(field.value, 8, False, 1)
-    data_raw |= (field_value & 0xFF) << 24
+    data_raw |= (field_value & 0xFFFF) << 16
     # zone1 | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'zone1')
     if field is None:
@@ -14498,15 +14694,15 @@ def encode_pgn_126720_fusionSetAllVolumes(nmea2000Message: NMEA2000Message) -> i
     data_raw |= (field_value & 0xFF) << 56
     return data_raw
 
-def decode_pgn_126720_seatalk1Keystroke(_data_raw_: int) -> NMEA2000Message:
+def decode_pgn_126720_fusionSetPower(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
-    nmea2000Message = NMEA2000Message(126720, 'seatalk1Keystroke', 'Seatalk1: Keystroke')
+    nmea2000Message = NMEA2000Message(126720, 'fusionSetPower', 'Fusion: Set Power ')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14515,11 +14711,86 @@ def decode_pgn_126720_seatalk1Keystroke(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 3
+
+    # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 28, PartOfPrimaryKey: True,
+    running_bit_offset = 16
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
+    proprietary_id = master_dict['FUSION_MESSAGE_ID'].get(proprietary_id_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Power", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 16
+
+    # 5:power | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 32
+    power_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    power = master_dict['FUSION_POWER_STATE'].get(power_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('power', 'Power', None, None, power, power_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    return nmea2000Message
+
+def encode_pgn_126720_fusionSetPower(nmea2000Message: NMEA2000Message) -> int:
+    """Encode Nmea2000Message object to binary data for PGN 126720."""
+    data_raw = 0
+    # manufacturerCode | Offset: 0, Length: 11, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'manufacturerCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Manufacturer Code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MANUFACTURER_CODE(field.value)
+    data_raw |= (field_value & 0x7FF) << 0
+    # reserved_11 | Offset: 11, Length: 2, Resolution: 1, Field Type: RESERVED
+    field = next(f for f in nmea2000Message.fields if f.id == 'reserved_11')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Reserved'")
+    field_value = field.value
+    data_raw |= (field_value & 0x3) << 11
+    # industryCode | Offset: 13, Length: 3, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'industryCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Industry Code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
+    data_raw |= (field_value & 0x7) << 13
+    # proprietaryId | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'proprietaryId')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Proprietary ID'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_MESSAGE_ID(field.value)
+    data_raw |= (field_value & 0xFFFF) << 16
+    # power | Offset: 32, Length: 8, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'power')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Power'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_FUSION_POWER_STATE(field.value)
+    data_raw |= (field_value & 0xFF) << 32
+    return data_raw
+
+def decode_pgn_126720_seatalk1Keystroke(_data_raw_: int) -> NMEA2000Message:
+    """Decode PGN 126720."""
+    nmea2000Message = NMEA2000Message(126720, 'seatalk1Keystroke', 'Seatalk1: Keystroke')
+    running_bit_offset = 0
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
+    running_bit_offset = 0
+    manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
+    manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 11
+
+    # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 11
+    reserved_11 = reserved_11_raw = decode_int(_data_raw_, running_bit_offset, 2)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 2
+
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
+    running_bit_offset = 13
+    industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
+    industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: 33264, PartOfPrimaryKey: True,
@@ -14624,11 +14895,11 @@ def decode_pgn_126720_seatalk1DeviceIdentification(_data_raw_: int) -> NMEA2000M
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'seatalk1DeviceIdentification', 'Seatalk1: Device Identification')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14637,11 +14908,11 @@ def decode_pgn_126720_seatalk1DeviceIdentification(_data_raw_: int) -> NMEA2000M
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: 33264, PartOfPrimaryKey: True,
@@ -14722,11 +14993,11 @@ def decode_pgn_126720_seatalk1DisplayBrightness(_data_raw_: int) -> NMEA2000Mess
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'seatalk1DisplayBrightness', 'Seatalk1: Display Brightness')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14735,11 +15006,11 @@ def decode_pgn_126720_seatalk1DisplayBrightness(_data_raw_: int) -> NMEA2000Mess
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: 3212, PartOfPrimaryKey: True,
@@ -14844,11 +15115,11 @@ def decode_pgn_126720_seatalk1DisplayColor(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'seatalk1DisplayColor', 'Seatalk1: Display Color')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14857,11 +15128,11 @@ def decode_pgn_126720_seatalk1DisplayColor(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: 3212, PartOfPrimaryKey: True,
@@ -14967,11 +15238,11 @@ def decode_pgn_126720_airmarAttitudeOffset(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarAttitudeOffset', 'Airmar: Attitude Offset')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -14980,18 +15251,18 @@ def decode_pgn_126720_airmarAttitudeOffset(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Attitude Offsets", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Attitude Offsets", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:azimuth_offset | Offset: 24, Length: 16, Signed: True Resolution: 0.0001, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -15065,11 +15336,11 @@ def decode_pgn_126720_airmarCalibrateCompass(_data_raw_: int) -> NMEA2000Message
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarCalibrateCompass', 'Airmar: Calibrate Compass')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15078,18 +15349,18 @@ def decode_pgn_126720_airmarCalibrateCompass(_data_raw_: int) -> NMEA2000Message
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 33, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 33, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Compass", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Compass", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:calibrate_function | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -15273,11 +15544,11 @@ def decode_pgn_126720_airmarTrueWindOptions(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarTrueWindOptions', 'Airmar: True Wind Options')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15286,18 +15557,18 @@ def decode_pgn_126720_airmarTrueWindOptions(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 34, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 34, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "True Wind Options", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "True Wind Options", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:cog_substitution_for_hdg | Offset: 24, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -15360,11 +15631,11 @@ def decode_pgn_126720_airmarSimulateMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarSimulateMode', 'Airmar: Simulate Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15373,18 +15644,18 @@ def decode_pgn_126720_airmarSimulateMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 35, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 35, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Simulate Mode", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Simulate Mode", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:simulate_mode | Offset: 24, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -15447,11 +15718,11 @@ def decode_pgn_126720_airmarCalibrateDepth(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarCalibrateDepth', 'Airmar: Calibrate Depth')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15460,18 +15731,18 @@ def decode_pgn_126720_airmarCalibrateDepth(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 40, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 40, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Depth", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Depth", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:speed_of_sound_mode | Offset: 24, Length: 16, Signed: False Resolution: 0.1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -15533,11 +15804,11 @@ def decode_pgn_126720_airmarCalibrateSpeed(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarCalibrateSpeed', 'Airmar: Calibrate Speed')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15546,18 +15817,18 @@ def decode_pgn_126720_airmarCalibrateSpeed(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 41, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 41, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Speed", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Speed", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:number_of_pairs_of_data_points | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -15631,11 +15902,11 @@ def decode_pgn_126720_airmarCalibrateTemperature(_data_raw_: int) -> NMEA2000Mes
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarCalibrateTemperature', 'Airmar: Calibrate Temperature')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15644,18 +15915,18 @@ def decode_pgn_126720_airmarCalibrateTemperature(_data_raw_: int) -> NMEA2000Mes
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 42, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 42, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Temperature", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Calibrate Temperature", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:temperature_instance | Offset: 24, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
@@ -15730,11 +16001,11 @@ def decode_pgn_126720_airmarSpeedFilterNone(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarSpeedFilterNone', 'Airmar: Speed Filter None')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15743,18 +16014,18 @@ def decode_pgn_126720_airmarSpeedFilterNone(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 43, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 43, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Speed Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Speed Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:filter_type | Offset: 24, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: 0, PartOfPrimaryKey: ,
@@ -15828,11 +16099,11 @@ def decode_pgn_126720_airmarSpeedFilterIir(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarSpeedFilterIir', 'Airmar: Speed Filter IIR')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15841,18 +16112,18 @@ def decode_pgn_126720_airmarSpeedFilterIir(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 43, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 43, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Speed Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Speed Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:filter_type | Offset: 24, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: 1, PartOfPrimaryKey: ,
@@ -15938,11 +16209,11 @@ def decode_pgn_126720_airmarTemperatureFilterNone(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarTemperatureFilterNone', 'Airmar: Temperature Filter None')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -15951,18 +16222,18 @@ def decode_pgn_126720_airmarTemperatureFilterNone(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 44, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 44, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Temperature Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Temperature Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:filter_type | Offset: 24, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: 0, PartOfPrimaryKey: ,
@@ -16036,11 +16307,11 @@ def decode_pgn_126720_airmarTemperatureFilterIir(_data_raw_: int) -> NMEA2000Mes
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarTemperatureFilterIir', 'Airmar: Temperature Filter IIR')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16049,18 +16320,18 @@ def decode_pgn_126720_airmarTemperatureFilterIir(_data_raw_: int) -> NMEA2000Mes
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 44, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 44, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Temperature Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Temperature Filter", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:filter_type | Offset: 24, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: 1, PartOfPrimaryKey: ,
@@ -16146,11 +16417,11 @@ def decode_pgn_126720_airmarNmea2000Options(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarNmea2000Options', 'Airmar: NMEA 2000 options')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16159,18 +16430,18 @@ def decode_pgn_126720_airmarNmea2000Options(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 46, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 46, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['AIRMAR_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "NMEA 2000 options", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "NMEA 2000 options", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:transmission_interval | Offset: 24, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -16233,11 +16504,11 @@ def decode_pgn_126720_airmarAddressableMultiFrame(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'airmarAddressableMultiFrame', 'Airmar: Addressable Multi-Frame')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16246,11 +16517,11 @@ def decode_pgn_126720_airmarAddressableMultiFrame(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -16290,15 +16561,15 @@ def encode_pgn_126720_airmarAddressableMultiFrame(nmea2000Message: NMEA2000Messa
     data_raw |= (field_value & 0xFF) << 16
     return data_raw
 
-def decode_pgn_126720_maretronSlaveResponse(_data_raw_: int) -> NMEA2000Message:
+def decode_pgn_126720_maretronDeviationCalibrationResponse(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
-    nmea2000Message = NMEA2000Message(126720, 'maretronSlaveResponse', 'Maretron: Slave Response')
+    nmea2000Message = NMEA2000Message(126720, 'maretronDeviationCalibrationResponse', 'Maretron: Deviation Calibration Response')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16307,17 +16578,118 @@ def decode_pgn_126720_maretronSlaveResponse(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 3
+
+    # 4:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 16
+    product_code_raw = decode_int(_data_raw_, running_bit_offset, 16)
+    product_code = master_dict['MARETRON_PRODUCT_CODE'].get(product_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product code', None, None, product_code, product_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 16
+
+    # 5:software_code | Offset: 32, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1, PartOfPrimaryKey: ,
+    running_bit_offset = 32
+    software_code_raw = decode_int(_data_raw_, running_bit_offset, 16)
+    software_code = master_dict['MARETRON_SOFTWARE_CODE'].get(software_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('softwareCode', 'Software code', "Version 1", None, software_code, software_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 16
+
+    # 6:command | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 80, PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    command_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    command = master_dict['MARETRON_COMMAND'].get(command_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('command', 'Command', "Deviation calibration", None, command, command_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    # 7:status | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 56
+    status_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    status = master_dict['MARETRON_STATUS_DEVIATION'].get(status_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('status', 'Status', None, None, status, status_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    return nmea2000Message
+
+def encode_pgn_126720_maretronDeviationCalibrationResponse(nmea2000Message: NMEA2000Message) -> int:
+    """Encode Nmea2000Message object to binary data for PGN 126720."""
+    data_raw = 0
+    # manufacturerCode | Offset: 0, Length: 11, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'manufacturerCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Manufacturer Code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MANUFACTURER_CODE(field.value)
+    data_raw |= (field_value & 0x7FF) << 0
+    # reserved_11 | Offset: 11, Length: 2, Resolution: 1, Field Type: RESERVED
+    field = next(f for f in nmea2000Message.fields if f.id == 'reserved_11')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Reserved'")
+    field_value = field.value
+    data_raw |= (field_value & 0x3) << 11
+    # industryCode | Offset: 13, Length: 3, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'industryCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Industry Code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_INDUSTRY_CODE(field.value)
+    data_raw |= (field_value & 0x7) << 13
+    # productCode | Offset: 16, Length: 16, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'productCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Product code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MARETRON_PRODUCT_CODE(field.value)
+    data_raw |= (field_value & 0xFFFF) << 16
+    # softwareCode | Offset: 32, Length: 16, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'softwareCode')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Software code'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MARETRON_SOFTWARE_CODE(field.value)
+    data_raw |= (field_value & 0xFFFF) << 32
+    # command | Offset: 48, Length: 8, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'command')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Command'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MARETRON_COMMAND(field.value)
+    data_raw |= (field_value & 0xFF) << 48
+    # status | Offset: 56, Length: 8, Resolution: 1, Field Type: LOOKUP
+    field = next(f for f in nmea2000Message.fields if f.id == 'status')
+    if field is None:
+        raise Exception("Cant encode this message, missing 'Status'")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_MARETRON_STATUS_DEVIATION(field.value)
+    data_raw |= (field_value & 0xFF) << 56
+    return data_raw
+
+def decode_pgn_126720_maretronSlaveResponse(_data_raw_: int) -> NMEA2000Message:
+    """Decode PGN 126720."""
+    nmea2000Message = NMEA2000Message(126720, 'maretronSlaveResponse', 'Maretron: Slave Response')
+    running_bit_offset = 0
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
+    running_bit_offset = 0
+    manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
+    manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 11
+
+    # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 11
+    reserved_11 = reserved_11_raw = decode_int(_data_raw_, running_bit_offset, 2)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 2
+
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
+    running_bit_offset = 13
+    industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
+    industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
     product_code = product_code_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product code', "0x1b2=SSC200", None, product_code, product_code_raw, None, FieldTypes.NUMBER, False))
+    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product code', None, None, product_code, product_code_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
     # 5:software_code | Offset: 32, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -16329,7 +16701,7 @@ def decode_pgn_126720_maretronSlaveResponse(_data_raw_: int) -> NMEA2000Message:
     # 6:command | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 48
     command = command_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('command', 'Command', "0x50=Deviation calibration result", None, command, command_raw, None, FieldTypes.NUMBER, False))
+    nmea2000Message.fields.append(NMEA2000Field('command', 'Command', None, None, command, command_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
     # 7:status | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -16391,11 +16763,11 @@ def decode_pgn_126720_garminDayMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'garminDayMode', 'Garmin: Day Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 229, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 229, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Garmin", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Garmin", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16404,11 +16776,11 @@ def decode_pgn_126720_garminDayMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:unknown_id_1 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 222, PartOfPrimaryKey: ,
@@ -16538,11 +16910,11 @@ def decode_pgn_126720_garminNightMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'garminNightMode', 'Garmin: Night Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 229, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 229, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Garmin", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Garmin", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16551,11 +16923,11 @@ def decode_pgn_126720_garminNightMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:unknown_id_1 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 222, PartOfPrimaryKey: ,
@@ -16685,11 +17057,11 @@ def decode_pgn_126720_garminColorMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 126720."""
     nmea2000Message = NMEA2000Message(126720, 'garminColorMode', 'Garmin: Color mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 229, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 229, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Garmin", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Garmin", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -16698,11 +17070,11 @@ def decode_pgn_126720_garminColorMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:unknown_id_1 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: 222, PartOfPrimaryKey: ,
@@ -18188,34 +18560,34 @@ def decode_pgn_126996(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('nmea2000Version', 'NMEA 2000 Version', "Binary number containing a decimal number of format AABBB, where AA is the major and BBB is the minor release. The decimal point position is assumed.", None, nmea_2000_version, nmea_2000_version_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 2:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 2:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
     product_code = product_code_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product Code', None, None, product_code, product_code_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product Code', None, None, product_code, product_code_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 3:model_id | Offset: 32, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: True,
+    # 3:model_id | Offset: 32, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     model_id = model_id_raw = decode_string_fix(_data_raw_, running_bit_offset, 256)
-    nmea2000Message.fields.append(NMEA2000Field('modelId', 'Model ID', None, None, model_id, model_id_raw, None, FieldTypes.STRING_FIX, True))
+    nmea2000Message.fields.append(NMEA2000Field('modelId', 'Model ID', None, None, model_id, model_id_raw, None, FieldTypes.STRING_FIX, False))
     running_bit_offset += 256
 
-    # 4:software_version_code | Offset: 288, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: True,
+    # 4:software_version_code | Offset: 288, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 288
     software_version_code = software_version_code_raw = decode_string_fix(_data_raw_, running_bit_offset, 256)
-    nmea2000Message.fields.append(NMEA2000Field('softwareVersionCode', 'Software Version Code', None, None, software_version_code, software_version_code_raw, None, FieldTypes.STRING_FIX, True))
+    nmea2000Message.fields.append(NMEA2000Field('softwareVersionCode', 'Software Version Code', None, None, software_version_code, software_version_code_raw, None, FieldTypes.STRING_FIX, False))
     running_bit_offset += 256
 
-    # 5:model_version | Offset: 544, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: True,
+    # 5:model_version | Offset: 544, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 544
     model_version = model_version_raw = decode_string_fix(_data_raw_, running_bit_offset, 256)
-    nmea2000Message.fields.append(NMEA2000Field('modelVersion', 'Model Version', None, None, model_version, model_version_raw, None, FieldTypes.STRING_FIX, True))
+    nmea2000Message.fields.append(NMEA2000Field('modelVersion', 'Model Version', None, None, model_version, model_version_raw, None, FieldTypes.STRING_FIX, False))
     running_bit_offset += 256
 
-    # 6:model_serial_code | Offset: 800, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: True,
+    # 6:model_serial_code | Offset: 800, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 800
     model_serial_code = model_serial_code_raw = decode_string_fix(_data_raw_, running_bit_offset, 256)
-    nmea2000Message.fields.append(NMEA2000Field('modelSerialCode', 'Model Serial Code', None, None, model_serial_code, model_serial_code_raw, None, FieldTypes.STRING_FIX, True))
+    nmea2000Message.fields.append(NMEA2000Field('modelSerialCode', 'Model Serial Code', None, None, model_serial_code, model_serial_code_raw, None, FieldTypes.STRING_FIX, False))
     running_bit_offset += 256
 
     # 7:certification_level | Offset: 1056, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -19170,11 +19542,11 @@ def decode_pgn_127258(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('sid', 'SID', None, None, sid, sid_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 2:source | Offset: 8, Length: 4, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 2:source | Offset: 8, Length: 4, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 8
     source_raw = decode_int(_data_raw_, running_bit_offset, 4)
     source = master_dict['MAGNETIC_VARIATION'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 4
 
     # 3:reserved_12 | Offset: 12, Length: 4, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -20081,10 +20453,10 @@ def decode_pgn_127495(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('minimumTemperatureShutOff', 'Minimum Temperature Shut Off', None, 'K', minimum_temperature_shut_off, minimum_temperature_shut_off_raw, PhysicalQuantities.TEMPERATURE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 9:usable_battery_energy | Offset: 88, Length: 32, Signed: False Resolution: 3600000.0, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 9:usable_battery_energy | Offset: 88, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 88
-    usable_battery_energy = usable_battery_energy_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 3600000.0)
-    nmea2000Message.fields.append(NMEA2000Field('usableBatteryEnergy', 'Usable Battery Energy', None, 'J', usable_battery_energy, usable_battery_energy_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
+    usable_battery_energy = usable_battery_energy_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('usableBatteryEnergy', 'Usable Battery Energy', None, 'kWh', usable_battery_energy, usable_battery_energy_raw, PhysicalQuantities.ELECTRICAL_ENERGY, FieldTypes.NUMBER, False))
     running_bit_offset += 32
 
     # 10:state_of_health | Offset: 120, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -20182,11 +20554,11 @@ def encode_pgn_127495(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Minimum Temperature Shut Off'")
     field_value = encode_number(field.value, 16, False, 0.01)
     data_raw |= (field_value & 0xFFFF) << 72
-    # usableBatteryEnergy | Offset: 88, Length: 32, Resolution: 3600000.0, Field Type: NUMBER
+    # usableBatteryEnergy | Offset: 88, Length: 32, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'usableBatteryEnergy')
     if field is None:
         raise Exception("Cant encode this message, missing 'Usable Battery Energy'")
-    field_value = encode_number(field.value, 32, False, 3600000.0)
+    field_value = encode_number(field.value, 32, False, 1)
     data_raw |= (field_value & 0xFFFFFFFF) << 88
     # stateOfHealth | Offset: 120, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'stateOfHealth')
@@ -21739,11 +22111,11 @@ def decode_pgn_127506(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 3:dc_type | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:dc_type | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     dc_type_raw = decode_int(_data_raw_, running_bit_offset, 8)
     dc_type = master_dict['DC_SOURCE'].get(dc_type_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('dcType', 'DC Type', None, None, dc_type, dc_type_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('dcType', 'DC Type', None, None, dc_type, dc_type_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 4:state_of_charge | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -21770,10 +22142,10 @@ def decode_pgn_127506(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('rippleVoltage', 'Ripple Voltage', None, 'V', ripple_voltage, ripple_voltage_raw, PhysicalQuantities.POTENTIAL_DIFFERENCE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 8:remaining_capacity | Offset: 72, Length: 16, Signed: False Resolution: 3600, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 8:remaining_capacity | Offset: 72, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 72
-    remaining_capacity = remaining_capacity_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 3600)
-    nmea2000Message.fields.append(NMEA2000Field('remainingCapacity', 'Remaining capacity', None, 'C', remaining_capacity, remaining_capacity_raw, PhysicalQuantities.ELECTRICAL_CHARGE, FieldTypes.NUMBER, False))
+    remaining_capacity = remaining_capacity_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('remainingCapacity', 'Remaining capacity', None, 'Ah', remaining_capacity, remaining_capacity_raw, PhysicalQuantities.ELECTRICAL_CHARGE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
     return nmea2000Message
@@ -21823,11 +22195,11 @@ def encode_pgn_127506(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Ripple Voltage'")
     field_value = encode_number(field.value, 16, False, 0.001)
     data_raw |= (field_value & 0xFFFF) << 56
-    # remainingCapacity | Offset: 72, Length: 16, Resolution: 3600, Field Type: NUMBER
+    # remainingCapacity | Offset: 72, Length: 16, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'remainingCapacity')
     if field is None:
         raise Exception("Cant encode this message, missing 'Remaining capacity'")
-    field_value = encode_number(field.value, 16, False, 3600)
+    field_value = encode_number(field.value, 16, False, 1)
     data_raw |= (field_value & 0xFFFF) << 72
     return data_raw
 
@@ -22489,10 +22861,10 @@ def decode_pgn_127513(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('chemistry', 'Chemistry', None, None, chemistry, chemistry_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 4
 
-    # 7:capacity | Offset: 24, Length: 16, Signed: False Resolution: 3600, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 7:capacity | Offset: 24, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 24
-    capacity = capacity_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 3600)
-    nmea2000Message.fields.append(NMEA2000Field('capacity', 'Capacity', None, 'C', capacity, capacity_raw, PhysicalQuantities.ELECTRICAL_CHARGE, FieldTypes.NUMBER, False))
+    capacity = capacity_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
+    nmea2000Message.fields.append(NMEA2000Field('capacity', 'Capacity', None, 'Ah', capacity, capacity_raw, PhysicalQuantities.ELECTRICAL_CHARGE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
     # 8:temperature_coefficient | Offset: 40, Length: 8, Signed: True Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -22554,11 +22926,11 @@ def encode_pgn_127513(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Chemistry'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_BATTERY_CHEMISTRY(field.value)
     data_raw |= (field_value & 0xF) << 20
-    # capacity | Offset: 24, Length: 16, Resolution: 3600, Field Type: NUMBER
+    # capacity | Offset: 24, Length: 16, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'capacity')
     if field is None:
         raise Exception("Cant encode this message, missing 'Capacity'")
-    field_value = encode_number(field.value, 16, False, 3600)
+    field_value = encode_number(field.value, 16, False, 1)
     data_raw |= (field_value & 0xFFFF) << 24
     # temperatureCoefficient | Offset: 40, Length: 8, Resolution: 1, Field Type: NUMBER
     field = next(f for f in nmea2000Message.fields if f.id == 'temperatureCoefficient')
@@ -24139,11 +24511,11 @@ def decode_pgn_128520(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('targetId', 'Target ID #', "Number of route, waypoint, event, mark, etc.", None, target_id__, target_id___raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 3:track_status | Offset: 24, Length: 2, Signed: False Resolution: 1, Field Type: BITLOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:track_status | Offset: 24, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 24
     track_status_raw = decode_int(_data_raw_, running_bit_offset, 2)
-    track_status = decode_bit_lookup(track_status_raw, master_flags_dict['TRACKING'])
-    nmea2000Message.fields.append(NMEA2000Field('trackStatus', 'Track Status', None, None, track_status, track_status_raw, None, FieldTypes.BITLOOKUP, False))
+    track_status = master_dict['TRACKING'].get(track_status_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('trackStatus', 'Track Status', None, None, track_status, track_status_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 2
 
     # 4:reported_target | Offset: 26, Length: 1, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -24252,11 +24624,11 @@ def encode_pgn_128520(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Target ID #'")
     field_value = encode_number(field.value, 16, False, 1)
     data_raw |= (field_value & 0xFFFF) << 8
-    # trackStatus | Offset: 24, Length: 2, Resolution: 1, Field Type: BITLOOKUP
+    # trackStatus | Offset: 24, Length: 2, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'trackStatus')
     if field is None:
         raise Exception("Cant encode this message, missing 'Track Status'")
-    raise Exception("Encoding 'BITLOOKUP' not supported")
+    field_value = field.raw_value if field.raw_value is not None else lookup_encode_TRACKING(field.value)
     data_raw |= (field_value & 0x3) << 24
     # reportedTarget | Offset: 26, Length: 1, Resolution: 1, Field Type: LOOKUP
     field = next(f for f in nmea2000Message.fields if f.id == 'reportedTarget')
@@ -30730,10 +31102,10 @@ def decode_pgn_129797(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('repeatIndicator', 'Repeat Indicator', None, None, repeat_indicator, repeat_indicator_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 2
 
-    # 3:source_id | Offset: 8, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 3:source_id | Offset: 8, Length: 32, Signed: False Resolution: 1, Field Type: MMSI, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 8
     source_id = source_id_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('sourceId', 'Source ID', None, None, source_id, source_id_raw, None, FieldTypes.NUMBER, False))
+    nmea2000Message.fields.append(NMEA2000Field('sourceId', 'Source ID', None, None, source_id, source_id_raw, None, FieldTypes.MMSI, True))
     running_bit_offset += 32
 
     # 4:reserved_40 | Offset: 40, Length: 1, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -30784,11 +31156,11 @@ def encode_pgn_129797(nmea2000Message: NMEA2000Message) -> int:
         raise Exception("Cant encode this message, missing 'Repeat Indicator'")
     field_value = field.raw_value if field.raw_value is not None else lookup_encode_REPEAT_INDICATOR(field.value)
     data_raw |= (field_value & 0x3) << 6
-    # sourceId | Offset: 8, Length: 32, Resolution: 1, Field Type: NUMBER
+    # sourceId | Offset: 8, Length: 32, Resolution: 1, Field Type: MMSI
     field = next(f for f in nmea2000Message.fields if f.id == 'sourceId')
     if field is None:
         raise Exception("Cant encode this message, missing 'Source ID'")
-    field_value = encode_number(field.value, 32, False, 1)
+    raise Exception("Encoding 'MMSI' not supported")
     data_raw |= (field_value & 0xFFFFFFFF) << 8
     # reserved_40 | Offset: 40, Length: 1, Resolution: 1, Field Type: RESERVED
     field = next(f for f in nmea2000Message.fields if f.id == 'reserved_40')
@@ -35259,11 +35631,11 @@ def decode_pgn_130306(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('windAngle', 'Wind Angle', None, 'rad', wind_angle, wind_angle_raw, PhysicalQuantities.ANGLE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 4:reference | Offset: 40, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 4:reference | Offset: 40, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 40
     reference_raw = decode_int(_data_raw_, running_bit_offset, 3)
     reference = master_dict['WIND_REFERENCE'].get(reference_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('reference', 'Reference', None, None, reference, reference_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('reference', 'Reference', None, None, reference, reference_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 3
 
     # 5:reserved_43 | Offset: 43, Length: 21, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -35398,11 +35770,11 @@ def decode_pgn_130311(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('sid', 'SID', None, None, sid, sid_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 2:temperature_source | Offset: 8, Length: 6, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 2:temperature_source | Offset: 8, Length: 6, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 8
     temperature_source_raw = decode_int(_data_raw_, running_bit_offset, 6)
     temperature_source = master_dict['TEMPERATURE_SOURCE'].get(temperature_source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('temperatureSource', 'Temperature Source', None, None, temperature_source, temperature_source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('temperatureSource', 'Temperature Source', None, None, temperature_source, temperature_source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 6
 
     # 3:humidity_source | Offset: 14, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -35493,11 +35865,11 @@ def decode_pgn_130312(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     source = master_dict['TEMPERATURE_SOURCE'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 4:actual_temperature | Offset: 24, Length: 16, Signed: False Resolution: 0.01, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -35581,11 +35953,11 @@ def decode_pgn_130313(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     source = master_dict['HUMIDITY_SOURCE'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 4:actual_humidity | Offset: 24, Length: 16, Signed: True Resolution: 0.004, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -35669,11 +36041,11 @@ def decode_pgn_130314(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     source = master_dict['PRESSURE_SOURCE'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 4:pressure | Offset: 24, Length: 32, Signed: True Resolution: 0.1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -35745,11 +36117,11 @@ def decode_pgn_130315(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     source = master_dict['PRESSURE_SOURCE'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 4:pressure | Offset: 24, Length: 32, Signed: True Resolution: 0.1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -35821,11 +36193,11 @@ def decode_pgn_130316(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 3:source | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     source = master_dict['TEMPERATURE_SOURCE'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 4:temperature | Offset: 24, Length: 24, Signed: False Resolution: 0.001, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -35943,12 +36315,12 @@ def decode_pgn_130320(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('tideLevelStandardDeviation', 'Tide Level standard deviation', None, 'm', tide_level_standard_deviation, tide_level_standard_deviation_raw, PhysicalQuantities.LENGTH, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 10:station_id | Offset: 152, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
+    # 10:station_id | Offset: 152, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 152
     station_id_raw, bits_to_skip = decode_string_lau(_data_raw_, running_bit_offset)
     station_id = station_id_raw
     running_bit_offset += bits_to_skip
-    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, False))
+    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, True))
     
 
     # 11:station_name | Offset: , Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
@@ -36230,12 +36602,12 @@ def decode_pgn_130322(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('waterTemperature', 'Water Temperature', None, 'K', water_temperature, water_temperature_raw, PhysicalQuantities.TEMPERATURE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 12:station_id | Offset: 200, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
+    # 12:station_id | Offset: 200, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 200
     station_id_raw, bits_to_skip = decode_string_lau(_data_raw_, running_bit_offset)
     station_id = station_id_raw
     running_bit_offset += bits_to_skip
-    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, False))
+    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, True))
     
 
     # 13:station_name | Offset: , Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
@@ -36410,12 +36782,12 @@ def decode_pgn_130323(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('ambientTemperature', 'Ambient Temperature', None, 'K', ambient_temperature, ambient_temperature_raw, PhysicalQuantities.TEMPERATURE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 14:station_id | Offset: 208, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
+    # 14:station_id | Offset: 208, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 208
     station_id_raw, bits_to_skip = decode_string_lau(_data_raw_, running_bit_offset)
     station_id = station_id_raw
     running_bit_offset += bits_to_skip
-    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, False))
+    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, True))
     
 
     # 15:station_name | Offset: , Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
@@ -36626,12 +36998,12 @@ def decode_pgn_130324(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('waterTemperature', 'Water Temperature', None, 'K', water_temperature, water_temperature_raw, PhysicalQuantities.TEMPERATURE, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 18:station_id | Offset: 272, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: ,
+    # 18:station_id | Offset: 272, Length: , Signed: False Resolution: , Field Type: STRING_LAU, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 272
     station_id_raw, bits_to_skip = decode_string_lau(_data_raw_, running_bit_offset)
     station_id = station_id_raw
     running_bit_offset += bits_to_skip
-    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, False))
+    nmea2000Message.fields.append(NMEA2000Field('stationId', 'Station ID', None, None, station_id, station_id_raw, None, FieldTypes.STRING_LAU, True))
     
 
     return nmea2000Message
@@ -39906,11 +40278,11 @@ def decode_pgn_130816_sonichubInit2(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubInit2', 'SonicHub: Init #2')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -39919,11 +40291,11 @@ def decode_pgn_130816_sonichubInit2(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40017,11 +40389,11 @@ def decode_pgn_130816_sonichubAmRadio(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubAmRadio', 'SonicHub: AM Radio')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40030,11 +40402,11 @@ def decode_pgn_130816_sonichubAmRadio(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40177,11 +40549,11 @@ def decode_pgn_130816_sonichubZoneInfo(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubZoneInfo', 'SonicHub: Zone info')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40190,11 +40562,11 @@ def decode_pgn_130816_sonichubZoneInfo(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40276,11 +40648,11 @@ def decode_pgn_130816_sonichubSource(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubSource', 'SonicHub: Source')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40289,11 +40661,11 @@ def decode_pgn_130816_sonichubSource(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40376,11 +40748,11 @@ def decode_pgn_130816_sonichubSourceList(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubSourceList', 'SonicHub: Source List')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40389,11 +40761,11 @@ def decode_pgn_130816_sonichubSourceList(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40499,11 +40871,11 @@ def decode_pgn_130816_sonichubControl(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubControl', 'SonicHub: Control')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40512,11 +40884,11 @@ def decode_pgn_130816_sonichubControl(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40599,11 +40971,11 @@ def decode_pgn_130816_sonichubFmRadio(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubFmRadio', 'SonicHub: FM Radio')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40612,11 +40984,11 @@ def decode_pgn_130816_sonichubFmRadio(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40759,11 +41131,11 @@ def decode_pgn_130816_sonichubPlaylist(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubPlaylist', 'SonicHub: Playlist')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40772,11 +41144,11 @@ def decode_pgn_130816_sonichubPlaylist(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40919,11 +41291,11 @@ def decode_pgn_130816_sonichubTrack(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubTrack', 'SonicHub: Track')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -40932,11 +41304,11 @@ def decode_pgn_130816_sonichubTrack(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41030,11 +41402,11 @@ def decode_pgn_130816_sonichubArtist(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubArtist', 'SonicHub: Artist')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41043,11 +41415,11 @@ def decode_pgn_130816_sonichubArtist(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41141,11 +41513,11 @@ def decode_pgn_130816_sonichubAlbum(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubAlbum', 'SonicHub: Album')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41154,11 +41526,11 @@ def decode_pgn_130816_sonichubAlbum(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41252,11 +41624,11 @@ def decode_pgn_130816_sonichubMenuItem(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubMenuItem', 'SonicHub: Menu Item')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41265,11 +41637,11 @@ def decode_pgn_130816_sonichubMenuItem(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41399,11 +41771,11 @@ def decode_pgn_130816_sonichubZones(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubZones', 'SonicHub: Zones')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41412,11 +41784,11 @@ def decode_pgn_130816_sonichubZones(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41498,11 +41870,11 @@ def decode_pgn_130816_sonichubMaxVolume(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubMaxVolume', 'SonicHub: Max Volume')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41511,11 +41883,11 @@ def decode_pgn_130816_sonichubMaxVolume(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41609,11 +41981,11 @@ def decode_pgn_130816_sonichubVolume(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubVolume', 'SonicHub: Volume')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41622,11 +41994,11 @@ def decode_pgn_130816_sonichubVolume(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41720,11 +42092,11 @@ def decode_pgn_130816_sonichubInit1(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubInit1', 'SonicHub: Init #1')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41733,11 +42105,11 @@ def decode_pgn_130816_sonichubInit1(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41807,11 +42179,11 @@ def decode_pgn_130816_sonichubPosition(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubPosition', 'SonicHub: Position')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41820,11 +42192,11 @@ def decode_pgn_130816_sonichubPosition(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41906,11 +42278,11 @@ def decode_pgn_130816_sonichubInit3(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'sonichubInit3', 'SonicHub: Init #3')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -41919,11 +42291,11 @@ def decode_pgn_130816_sonichubInit3(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42017,11 +42389,11 @@ def decode_pgn_130816_simradTextMessage(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130816."""
     nmea2000Message = NMEA2000Message(130816, 'simradTextMessage', 'Simrad: Text Message')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42030,11 +42402,11 @@ def decode_pgn_130816_simradTextMessage(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42186,11 +42558,11 @@ def decode_pgn_130817_navicoUnknown(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130817."""
     nmea2000Message = NMEA2000Message(130817, 'navicoUnknown', 'Navico: Unknown')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42199,11 +42571,11 @@ def decode_pgn_130817_navicoUnknown(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -42295,11 +42667,11 @@ def decode_pgn_130817_lowranceProductInformation(_data_raw_: int) -> NMEA2000Mes
     """Decode PGN 130817."""
     nmea2000Message = NMEA2000Message(130817, 'lowranceProductInformation', 'Lowrance: Product Information')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 140, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 140, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Lowrance", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Lowrance", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42308,17 +42680,17 @@ def decode_pgn_130817_lowranceProductInformation(_data_raw_: int) -> NMEA2000Mes
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
+    # 4:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
     product_code = product_code_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product Code', None, None, product_code, product_code_raw, None, FieldTypes.NUMBER, True))
+    nmea2000Message.fields.append(NMEA2000Field('productCode', 'Product Code', None, None, product_code, product_code_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
     # 5:model | Offset: 32, Length: 256, Signed: False Resolution: , Field Type: STRING_FIX, Match: , PartOfPrimaryKey: ,
@@ -42444,11 +42816,11 @@ def decode_pgn_130818(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130818."""
     nmea2000Message = NMEA2000Message(130818, 'simnetReprogramData', 'Simnet: Reprogram Data')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42457,11 +42829,11 @@ def decode_pgn_130818(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:version | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -42533,11 +42905,11 @@ def decode_pgn_130819(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130819."""
     nmea2000Message = NMEA2000Message(130819, 'simnetRequestReprogram', 'Simnet: Request Reprogram')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42546,11 +42918,11 @@ def decode_pgn_130819(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -42902,11 +43274,11 @@ def decode_pgn_130820_simnetReprogramStatus(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'simnetReprogramStatus', 'Simnet: Reprogram Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42915,11 +43287,11 @@ def decode_pgn_130820_simnetReprogramStatus(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:reserved_16 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -42987,11 +43359,11 @@ def decode_pgn_130820_furunoUnknown130820(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'furunoUnknown130820', 'Furuno: Unknown 130820')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43000,11 +43372,11 @@ def decode_pgn_130820_furunoUnknown130820(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -43096,11 +43468,11 @@ def decode_pgn_130820_fusionVersions(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionVersions', 'Fusion: Versions')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43109,11 +43481,11 @@ def decode_pgn_130820_fusionVersions(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32769, PartOfPrimaryKey: ,
@@ -43218,11 +43590,11 @@ def decode_pgn_130820_fusionSource(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSource', 'Fusion: Source')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43231,11 +43603,11 @@ def decode_pgn_130820_fusionSource(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32770, PartOfPrimaryKey: ,
@@ -43336,11 +43708,11 @@ def decode_pgn_130820_fusionSourceCount(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSourceCount', 'Fusion: Source Count')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43349,11 +43721,11 @@ def decode_pgn_130820_fusionSourceCount(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32771, PartOfPrimaryKey: ,
@@ -43410,11 +43782,11 @@ def decode_pgn_130820_fusionMedia(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionMedia', 'Fusion: Media')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43423,18 +43795,18 @@ def decode_pgn_130820_fusionMedia(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32772, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32772, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Info", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Info", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -43545,11 +43917,11 @@ def decode_pgn_130820_fusionTrackName(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionTrackName', 'Fusion: Track Name')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43558,18 +43930,18 @@ def decode_pgn_130820_fusionTrackName(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32773, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32773, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Title", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Title", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -43638,11 +44010,11 @@ def decode_pgn_130820_fusionArtistName(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionArtistName', 'Fusion: Artist Name')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43651,18 +44023,18 @@ def decode_pgn_130820_fusionArtistName(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32774, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32774, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Artist", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Artist", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -43731,11 +44103,11 @@ def decode_pgn_130820_fusionAlbumName(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionAlbumName', 'Fusion: Album Name')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43744,18 +44116,18 @@ def decode_pgn_130820_fusionAlbumName(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32775, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32775, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Album", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Album", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -43824,11 +44196,11 @@ def decode_pgn_130820_fusionDeviceName(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionDeviceName', 'Fusion: Device Name')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43837,18 +44209,18 @@ def decode_pgn_130820_fusionDeviceName(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32801, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32801, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Unit Name", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Unit Name", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:name | Offset: 32, Length: , Signed: False Resolution: , Field Type: STRING_LZ, Match: , PartOfPrimaryKey: ,
@@ -43893,11 +44265,11 @@ def decode_pgn_130820_fusionZoneName(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionZoneName', 'Fusion: Zone Name')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43906,18 +44278,18 @@ def decode_pgn_130820_fusionZoneName(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32813, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32813, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Zone Name", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Zone Name", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:number | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -43974,11 +44346,11 @@ def decode_pgn_130820_fusionTrackPosition(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionTrackPosition', 'Fusion: Track Position')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -43987,18 +44359,18 @@ def decode_pgn_130820_fusionTrackPosition(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32777, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32777, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Progress", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Track Progress", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -44060,11 +44432,11 @@ def decode_pgn_130820_fusionTuner(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionTuner', 'Fusion: Tuner')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44073,18 +44445,18 @@ def decode_pgn_130820_fusionTuner(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32779, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32779, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Tuner", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Tuner", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
@@ -44178,11 +44550,11 @@ def decode_pgn_130820_fusionMarineTuner(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionMarineTuner', 'Fusion: MARINE_TUNER')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44191,18 +44563,18 @@ def decode_pgn_130820_fusionMarineTuner(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32780, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32780, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Marine Tuner", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Marine Tuner", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -44283,11 +44655,11 @@ def decode_pgn_130820_fusionMarineSquelch(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionMarineSquelch', 'Fusion: Marine Squelch')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44296,18 +44668,18 @@ def decode_pgn_130820_fusionMarineSquelch(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32781, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32781, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Marine Squelch", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Marine Squelch", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -44369,11 +44741,11 @@ def decode_pgn_130820_fusionMarineScanMode(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionMarineScanMode', 'Fusion: Marine Scan Mode')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44382,18 +44754,18 @@ def decode_pgn_130820_fusionMarineScanMode(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32782, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32782, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Marine Scan Mode", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Marine Scan Mode", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -44456,11 +44828,11 @@ def decode_pgn_130820_fusionMenuItem(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionMenuItem', 'Fusion: Menu Item')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44469,18 +44841,18 @@ def decode_pgn_130820_fusionMenuItem(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32785, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32785, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Menu Item", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Menu Item", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -44573,11 +44945,11 @@ def decode_pgn_130820_fusionAuxGain(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionAuxGain', 'Fusion: Aux Gain')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44586,18 +44958,18 @@ def decode_pgn_130820_fusionAuxGain(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32787, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32787, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Aux Gain", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Aux Gain", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -44659,11 +45031,11 @@ def decode_pgn_130820_fusionUsbRepeatStatus(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionUsbRepeatStatus', 'Fusion: USB Repeat Status')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44672,18 +45044,18 @@ def decode_pgn_130820_fusionUsbRepeatStatus(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32788, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32788, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Setting", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Setting", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:id | Offset: 32, Length: 32, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 9, PartOfPrimaryKey: ,
@@ -44747,11 +45119,11 @@ def decode_pgn_130820_fusionSetting(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSetting', 'Fusion: Setting')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44760,18 +45132,18 @@ def decode_pgn_130820_fusionSetting(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32788, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32788, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Setting", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Setting", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:id | Offset: 32, Length: 32, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -44834,11 +45206,11 @@ def decode_pgn_130820_fusionSettings(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSettings', 'Fusion: Settings')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44847,18 +45219,18 @@ def decode_pgn_130820_fusionSettings(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32789, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32789, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Settings", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Settings", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:count | Offset: 32, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -44933,11 +45305,11 @@ def decode_pgn_130820_fusionMute(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionMute', 'Fusion: Mute')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -44946,18 +45318,18 @@ def decode_pgn_130820_fusionMute(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32791, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32791, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Mute", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Mute", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:mute | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -45008,11 +45380,11 @@ def decode_pgn_130820_fusionBalance(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionBalance', 'Fusion: Balance')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45021,18 +45393,18 @@ def decode_pgn_130820_fusionBalance(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32792, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32792, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Balance", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Balance", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -45094,11 +45466,11 @@ def decode_pgn_130820_fusionLowPassFilter(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionLowPassFilter', 'Fusion: Low Pass Filter')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45107,18 +45479,18 @@ def decode_pgn_130820_fusionLowPassFilter(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32793, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32793, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Low Pass Filter", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Low Pass Filter", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -45180,11 +45552,11 @@ def decode_pgn_130820_fusionSublevels(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSublevels', 'Fusion: Sublevels')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45193,18 +45565,18 @@ def decode_pgn_130820_fusionSublevels(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32794, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32794, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Sublevels", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Sublevels", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone_1 | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -45290,11 +45662,11 @@ def decode_pgn_130820_fusionEq(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionEq', 'Fusion: EQ')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45303,18 +45675,18 @@ def decode_pgn_130820_fusionEq(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32795, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32795, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Tone", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Tone", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -45400,11 +45772,11 @@ def decode_pgn_130820_fusionVolumeLimits(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionVolumeLimits', 'Fusion: Volume Limits')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45413,18 +45785,18 @@ def decode_pgn_130820_fusionVolumeLimits(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32796, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32796, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Volume Limits", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Volume Limits", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone_1_volume_limit | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -45510,11 +45882,11 @@ def decode_pgn_130820_fusionVolumes(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionVolumes', 'Fusion: Volumes')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45523,18 +45895,18 @@ def decode_pgn_130820_fusionVolumes(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32797, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32797, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Volume", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Volume", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone_1 | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -45620,11 +45992,11 @@ def decode_pgn_130820_fusionCapabilities(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionCapabilities', 'Fusion: Capabilities')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45633,18 +46005,18 @@ def decode_pgn_130820_fusionCapabilities(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32798, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32798, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Capabilities", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Capabilities", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone_1 | Offset: 32, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -45742,11 +46114,11 @@ def decode_pgn_130820_fusionLineLevelControl(_data_raw_: int) -> NMEA2000Message
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionLineLevelControl', 'Fusion: Line Level Control')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45755,18 +46127,18 @@ def decode_pgn_130820_fusionLineLevelControl(_data_raw_: int) -> NMEA2000Message
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32799, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32799, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Line Level Control", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Line Level Control", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:zone | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -45828,11 +46200,11 @@ def decode_pgn_130820_fusionPowerState(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionPowerState', 'Fusion: Power State')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45841,18 +46213,18 @@ def decode_pgn_130820_fusionPowerState(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32800, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32800, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Power", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Power", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:state | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -45903,11 +46275,11 @@ def decode_pgn_130820_fusionSiriusxm(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxm', 'Fusion: SiriusXM')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -45916,18 +46288,18 @@ def decode_pgn_130820_fusionSiriusxm(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32802, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32802, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Sirius", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Sirius", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46028,11 +46400,11 @@ def decode_pgn_130820_fusionSiriusxmChannel(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmChannel', 'Fusion: SiriusXM Channel')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46041,18 +46413,18 @@ def decode_pgn_130820_fusionSiriusxmChannel(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32804, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32804, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Channel", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Channel", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46121,11 +46493,11 @@ def decode_pgn_130820_fusionSiriusxmTitle(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmTitle', 'Fusion: SiriusXM Title')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46134,18 +46506,18 @@ def decode_pgn_130820_fusionSiriusxmTitle(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32805, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32805, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Title", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Title", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46214,11 +46586,11 @@ def decode_pgn_130820_fusionSiriusxmArtist(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmArtist', 'Fusion: SiriusXM Artist')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46227,18 +46599,18 @@ def decode_pgn_130820_fusionSiriusxmArtist(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32806, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32806, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Artist", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Artist", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46307,11 +46679,11 @@ def decode_pgn_130820_fusionSiriusxmContentInfo(_data_raw_: int) -> NMEA2000Mess
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmContentInfo', 'Fusion: SiriusXM Content Info')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46320,18 +46692,18 @@ def decode_pgn_130820_fusionSiriusxmContentInfo(_data_raw_: int) -> NMEA2000Mess
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32807, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32807, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Genre", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Genre", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46400,11 +46772,11 @@ def decode_pgn_130820_fusionSiriusxmCategory(_data_raw_: int) -> NMEA2000Message
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmCategory', 'Fusion: SiriusXM Category')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46413,18 +46785,18 @@ def decode_pgn_130820_fusionSiriusxmCategory(_data_raw_: int) -> NMEA2000Message
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32808, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32808, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Category", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Category", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46493,11 +46865,11 @@ def decode_pgn_130820_fusionSiriusxmSignal(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmSignal', 'Fusion: SiriusXM Signal')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46506,18 +46878,18 @@ def decode_pgn_130820_fusionSiriusxmSignal(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32809, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32809, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXm Signal", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXm Signal", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46579,11 +46951,11 @@ def decode_pgn_130820_fusionSiriusxmPresets(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
     nmea2000Message = NMEA2000Message(130820, 'fusionSiriusxmPresets', 'Fusion: SiriusXM Presets')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 419, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Fusion Electronics", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46592,18 +46964,18 @@ def decode_pgn_130820_fusionSiriusxmPresets(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32812, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 32812, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id_raw = decode_int(_data_raw_, running_bit_offset, 16)
     message_id = master_dict['FUSION_STATUS_MESSAGE_ID'].get(message_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Presets", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "SiriusXM Presets", None, message_id, message_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 16
 
     # 5:source_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -46695,11 +47067,11 @@ def decode_pgn_130821_navicoAsciiData(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130821."""
     nmea2000Message = NMEA2000Message(130821, 'navicoAsciiData', 'Navico: ASCII Data')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46708,11 +47080,11 @@ def decode_pgn_130821_navicoAsciiData(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -46768,11 +47140,11 @@ def decode_pgn_130821_furunoUnknown130821(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130821."""
     nmea2000Message = NMEA2000Message(130821, 'furunoUnknown130821', 'Furuno: Unknown 130821')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46781,11 +47153,11 @@ def decode_pgn_130821_furunoUnknown130821(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -46941,11 +47313,11 @@ def decode_pgn_130822(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130822."""
     nmea2000Message = NMEA2000Message(130822, 'navicoUnknown1', 'Navico: Unknown 1')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -46954,11 +47326,11 @@ def decode_pgn_130822(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:data | Offset: 16, Length: 1848, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -47006,11 +47378,11 @@ def decode_pgn_130823(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130823."""
     nmea2000Message = NMEA2000Message(130823, 'maretronProprietaryTemperatureHighRange', 'Maretron: Proprietary Temperature High Range')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47019,11 +47391,11 @@ def decode_pgn_130823(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -47038,11 +47410,11 @@ def decode_pgn_130823(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('instance', 'Instance', None, None, instance, instance_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 8
 
-    # 6:source | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    # 6:source | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 32
     source_raw = decode_int(_data_raw_, running_bit_offset, 8)
     source = master_dict['TEMPERATURE_SOURCE'].get(source_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('source', 'Source', None, None, source, source_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 7:actual_temperature | Offset: 40, Length: 16, Signed: False Resolution: 0.1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -47139,11 +47511,11 @@ def decode_pgn_130824_bGKeyValueData(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130824."""
     nmea2000Message = NMEA2000Message(130824, 'bGKeyValueData', 'B&G: key-value data')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 381, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 381, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "B & G", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "B & G", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47152,17 +47524,17 @@ def decode_pgn_130824_bGKeyValueData(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:key | Offset: 16, Length: 12, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: ,
+    # 4:key | Offset: 16, Length: 12, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     raise Exception("PGN 130824 FieldType (DYNAMIC_FIELD_KEY) not supported")
-    nmea2000Message.fields.append(NMEA2000Field('key', 'Key', None, None, key, key_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, False))
+    nmea2000Message.fields.append(NMEA2000Field('key', 'Key', None, None, key, key_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, True))
     running_bit_offset += 12
 
     # 5:length | Offset: 28, Length: 4, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_LENGTH, Match: , PartOfPrimaryKey: ,
@@ -47219,11 +47591,11 @@ def decode_pgn_130824_maretronAnnunciator(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130824."""
     nmea2000Message = NMEA2000Message(130824, 'maretronAnnunciator', 'Maretron: Annunciator')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47232,11 +47604,11 @@ def decode_pgn_130824_maretronAnnunciator(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:field_4 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -47332,11 +47704,11 @@ def decode_pgn_130825(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130825."""
     nmea2000Message = NMEA2000Message(130825, 'navicoUnknown2', 'Navico: Unknown 2')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 275, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Navico", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47345,11 +47717,11 @@ def decode_pgn_130825(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:data | Offset: 16, Length: 80, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
@@ -47397,11 +47769,11 @@ def decode_pgn_130827(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130827."""
     nmea2000Message = NMEA2000Message(130827, 'lowranceUnknown', 'Lowrance: unknown')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 140, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 140, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Lowrance", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Lowrance", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47410,11 +47782,11 @@ def decode_pgn_130827(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -47522,11 +47894,11 @@ def decode_pgn_130828(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130828."""
     nmea2000Message = NMEA2000Message(130828, 'simnetSetSerialNumber', 'Simnet: Set Serial Number')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47535,11 +47907,11 @@ def decode_pgn_130828(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -47575,11 +47947,11 @@ def decode_pgn_130831(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130831."""
     nmea2000Message = NMEA2000Message(130831, 'suzukiEngineAndStorageDeviceConfig', 'Suzuki: Engine and Storage Device Config')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 586, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 586, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Suzuki Motor Corporation", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Suzuki Motor Corporation", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47588,11 +47960,11 @@ def decode_pgn_130831(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -47628,11 +48000,11 @@ def decode_pgn_130832(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130832."""
     nmea2000Message = NMEA2000Message(130832, 'simnetFuelUsedHighResolution', 'Simnet: Fuel Used - High Resolution')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47641,11 +48013,11 @@ def decode_pgn_130832(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -47681,11 +48053,11 @@ def decode_pgn_130833(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130833."""
     nmea2000Message = NMEA2000Message(130833, 'bGUserAndRemoteRename', 'B&G: User and Remote rename')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 381, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 381, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "B & G", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "B & G", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47694,17 +48066,17 @@ def decode_pgn_130833(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:data_type | Offset: 16, Length: 12, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: ,
+    # 4:data_type | Offset: 16, Length: 12, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 16
     raise Exception("PGN 130833 FieldType (DYNAMIC_FIELD_KEY) not supported")
-    nmea2000Message.fields.append(NMEA2000Field('dataType', 'Data Type', None, None, data_type, data_type_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, False))
+    nmea2000Message.fields.append(NMEA2000Field('dataType', 'Data Type', None, None, data_type, data_type_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, True))
     running_bit_offset += 12
 
     # 5:length | Offset: 28, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -47807,11 +48179,11 @@ def decode_pgn_130834(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130834."""
     nmea2000Message = NMEA2000Message(130834, 'simnetEngineAndTankConfiguration', 'Simnet: Engine and Tank Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47820,11 +48192,11 @@ def decode_pgn_130834(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -47860,11 +48232,11 @@ def decode_pgn_130835(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130835."""
     nmea2000Message = NMEA2000Message(130835, 'simnetSetEngineAndTankConfiguration', 'Simnet: Set Engine and Tank Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47873,11 +48245,11 @@ def decode_pgn_130835(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -47932,11 +48304,11 @@ def decode_pgn_130836_simnetFluidLevelSensorConfiguration(_data_raw_: int) -> NM
     """Decode PGN 130836."""
     nmea2000Message = NMEA2000Message(130836, 'simnetFluidLevelSensorConfiguration', 'Simnet: Fluid Level Sensor Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -47945,11 +48317,11 @@ def decode_pgn_130836_simnetFluidLevelSensorConfiguration(_data_raw_: int) -> NM
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:c | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -48090,11 +48462,11 @@ def decode_pgn_130836_maretronSwitchStatusCounter(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 130836."""
     nmea2000Message = NMEA2000Message(130836, 'maretronSwitchStatusCounter', 'Maretron: Switch Status Counter')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48103,11 +48475,11 @@ def decode_pgn_130836_maretronSwitchStatusCounter(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:instance | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -48273,11 +48645,11 @@ def decode_pgn_130837_simnetFuelFlowTurbineConfiguration(_data_raw_: int) -> NME
     """Decode PGN 130837."""
     nmea2000Message = NMEA2000Message(130837, 'simnetFuelFlowTurbineConfiguration', 'Simnet: Fuel Flow Turbine Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48286,11 +48658,11 @@ def decode_pgn_130837_simnetFuelFlowTurbineConfiguration(_data_raw_: int) -> NME
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -48322,11 +48694,11 @@ def decode_pgn_130837_maretronSwitchStatusTimer(_data_raw_: int) -> NMEA2000Mess
     """Decode PGN 130837."""
     nmea2000Message = NMEA2000Message(130837, 'maretronSwitchStatusTimer', 'Maretron: Switch Status Timer')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 137, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Maretron", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48335,11 +48707,11 @@ def decode_pgn_130837_maretronSwitchStatusTimer(_data_raw_: int) -> NMEA2000Mess
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:instance | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: True,
@@ -48486,11 +48858,11 @@ def decode_pgn_130838(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130838."""
     nmea2000Message = NMEA2000Message(130838, 'simnetFluidLevelWarning', 'Simnet: Fluid Level Warning')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48499,11 +48871,11 @@ def decode_pgn_130838(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -48539,11 +48911,11 @@ def decode_pgn_130839(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130839."""
     nmea2000Message = NMEA2000Message(130839, 'simnetPressureSensorConfiguration', 'Simnet: Pressure Sensor Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48552,11 +48924,11 @@ def decode_pgn_130839(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -48592,11 +48964,11 @@ def decode_pgn_130840(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130840."""
     nmea2000Message = NMEA2000Message(130840, 'simnetDataUserGroupConfiguration', 'Simnet: Data User Group Configuration')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48605,11 +48977,11 @@ def decode_pgn_130840(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -48673,11 +49045,11 @@ def decode_pgn_130842_simnetAisClassBStaticDataMsg24PartA(_data_raw_: int) -> NM
     """Decode PGN 130842."""
     nmea2000Message = NMEA2000Message(130842, 'simnetAisClassBStaticDataMsg24PartA', 'Simnet: AIS Class B static data (msg 24 Part A)')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48686,17 +49058,17 @@ def decode_pgn_130842_simnetAisClassBStaticDataMsg24PartA(_data_raw_: int) -> NM
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 6, Signed: False Resolution: 1, Field Type: NUMBER, Match: 0, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 6, Signed: False Resolution: 1, Field Type: NUMBER, Match: 0, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id = message_id_raw = decode_number(_data_raw_, running_bit_offset, 6, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Msg 24 Part A", None, message_id, message_id_raw, None, FieldTypes.NUMBER, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Msg 24 Part A", None, message_id, message_id_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 6
 
     # 5:repeat_indicator | Offset: 22, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -48795,11 +49167,11 @@ def decode_pgn_130842_furunoSixDegreesOfFreedomMovement(_data_raw_: int) -> NMEA
     """Decode PGN 130842."""
     nmea2000Message = NMEA2000Message(130842, 'furunoSixDegreesOfFreedomMovement', 'Furuno: Six Degrees Of Freedom Movement')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48808,11 +49180,11 @@ def decode_pgn_130842_furunoSixDegreesOfFreedomMovement(_data_raw_: int) -> NMEA
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 32, Signed: True Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -48952,11 +49324,11 @@ def decode_pgn_130842_simnetAisClassBStaticDataMsg24PartB(_data_raw_: int) -> NM
     """Decode PGN 130842."""
     nmea2000Message = NMEA2000Message(130842, 'simnetAisClassBStaticDataMsg24PartB', 'Simnet: AIS Class B static data (msg 24 Part B)')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -48965,17 +49337,17 @@ def decode_pgn_130842_simnetAisClassBStaticDataMsg24PartB(_data_raw_: int) -> NM
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:message_id | Offset: 16, Length: 6, Signed: False Resolution: 1, Field Type: NUMBER, Match: 1, PartOfPrimaryKey: ,
+    # 4:message_id | Offset: 16, Length: 6, Signed: False Resolution: 1, Field Type: NUMBER, Match: 1, PartOfPrimaryKey: True,
     running_bit_offset = 16
     message_id = message_id_raw = decode_number(_data_raw_, running_bit_offset, 6, False, 1)
-    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Msg 24 Part B", None, message_id, message_id_raw, None, FieldTypes.NUMBER, False))
+    nmea2000Message.fields.append(NMEA2000Field('messageId', 'Message ID', "Msg 24 Part B", None, message_id, message_id_raw, None, FieldTypes.NUMBER, True))
     running_bit_offset += 6
 
     # 5:repeat_indicator | Offset: 22, Length: 2, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -49206,11 +49578,11 @@ def decode_pgn_130843_furunoHeelAngleRollInformation(_data_raw_: int) -> NMEA200
     """Decode PGN 130843."""
     nmea2000Message = NMEA2000Message(130843, 'furunoHeelAngleRollInformation', 'Furuno: Heel Angle, Roll Information')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49219,11 +49591,11 @@ def decode_pgn_130843_furunoHeelAngleRollInformation(_data_raw_: int) -> NMEA200
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -49315,11 +49687,11 @@ def decode_pgn_130843_simnetSonarStatusFrequencyAndDspVoltage(_data_raw_: int) -
     """Decode PGN 130843."""
     nmea2000Message = NMEA2000Message(130843, 'simnetSonarStatusFrequencyAndDspVoltage', 'Simnet: Sonar Status, Frequency and DSP Voltage')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49328,11 +49700,11 @@ def decode_pgn_130843_simnetSonarStatusFrequencyAndDspVoltage(_data_raw_: int) -
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -49387,11 +49759,11 @@ def decode_pgn_130845_furunoMultiSatsInViewExtended(_data_raw_: int) -> NMEA2000
     """Decode PGN 130845."""
     nmea2000Message = NMEA2000Message(130845, 'furunoMultiSatsInViewExtended', 'Furuno: Multi Sats In View Extended')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49400,11 +49772,11 @@ def decode_pgn_130845_furunoMultiSatsInViewExtended(_data_raw_: int) -> NMEA2000
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -49436,11 +49808,11 @@ def decode_pgn_130845_simnetKeyValue(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130845."""
     nmea2000Message = NMEA2000Message(130845, 'simnetKeyValue', 'Simnet: Key Value')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49449,11 +49821,11 @@ def decode_pgn_130845_simnetKeyValue(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:address | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -49482,10 +49854,10 @@ def decode_pgn_130845_simnetKeyValue(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_40', 'Reserved', None, None, reserved_40, reserved_40_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 8
 
-    # 8:key | Offset: 48, Length: 16, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: ,
+    # 8:key | Offset: 48, Length: 16, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 48
     raise Exception("PGN 130845 FieldType (DYNAMIC_FIELD_KEY) not supported")
-    nmea2000Message.fields.append(NMEA2000Field('key', 'Key', None, None, key, key_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, False))
+    nmea2000Message.fields.append(NMEA2000Field('key', 'Key', None, None, key, key_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, True))
     running_bit_offset += 16
 
     # 9:spare | Offset: 64, Length: 8, Signed: False Resolution: 1, Field Type: SPARE, Match: , PartOfPrimaryKey: ,
@@ -49601,11 +49973,11 @@ def decode_pgn_130846_simnetParameterSet(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130846."""
     nmea2000Message = NMEA2000Message(130846, 'simnetParameterSet', 'Simnet: Parameter Set')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49614,11 +49986,11 @@ def decode_pgn_130846_simnetParameterSet(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:address | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -49646,10 +50018,10 @@ def decode_pgn_130846_simnetParameterSet(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('d', 'D', "Various values observed", None, d, d_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 8:key | Offset: 56, Length: 16, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: ,
+    # 8:key | Offset: 56, Length: 16, Signed: False Resolution: 1, Field Type: DYNAMIC_FIELD_KEY, Match: , PartOfPrimaryKey: True,
     running_bit_offset = 56
     raise Exception("PGN 130846 FieldType (DYNAMIC_FIELD_KEY) not supported")
-    nmea2000Message.fields.append(NMEA2000Field('key', 'Key', None, None, key, key_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, False))
+    nmea2000Message.fields.append(NMEA2000Field('key', 'Key', None, None, key, key_raw, None, FieldTypes.DYNAMIC_FIELD_KEY, True))
     running_bit_offset += 16
 
     # 9:spare | Offset: 72, Length: 8, Signed: False Resolution: 1, Field Type: SPARE, Match: , PartOfPrimaryKey: ,
@@ -49742,11 +50114,11 @@ def decode_pgn_130846_furunoMotionSensorStatusExtended(_data_raw_: int) -> NMEA2
     """Decode PGN 130846."""
     nmea2000Message = NMEA2000Message(130846, 'furunoMotionSensorStatusExtended', 'Furuno: Motion Sensor Status Extended')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1855, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Furuno", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49755,11 +50127,11 @@ def decode_pgn_130846_furunoMotionSensorStatusExtended(_data_raw_: int) -> NMEA2
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     return nmea2000Message
@@ -49795,11 +50167,11 @@ def decode_pgn_130847(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130847."""
     nmea2000Message = NMEA2000Message(130847, 'seatalkNodeStatistics', 'SeaTalk: Node Statistics')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49808,11 +50180,11 @@ def decode_pgn_130847(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:product_code | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -49908,11 +50280,11 @@ def decode_pgn_130848(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130848."""
     nmea2000Message = NMEA2000Message(130848, 'seatalkWaypointInformation', 'SeaTalk: Waypoint Information')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -49921,11 +50293,11 @@ def decode_pgn_130848(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:sid | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50062,11 +50434,11 @@ def decode_pgn_130850_simnetApCommand(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130850."""
     nmea2000Message = NMEA2000Message(130850, 'simnetApCommand', 'Simnet: AP Command')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50075,11 +50447,11 @@ def decode_pgn_130850_simnetApCommand(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:address | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50094,11 +50466,11 @@ def decode_pgn_130850_simnetApCommand(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_24', 'Reserved', None, None, reserved_24, reserved_24_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 8
 
-    # 6:proprietary_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 255, PartOfPrimaryKey: ,
+    # 6:proprietary_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 255, PartOfPrimaryKey: True,
     running_bit_offset = 32
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['SIMNET_EVENT_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Autopilot", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Autopilot", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 7:ap_status | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
@@ -50211,11 +50583,11 @@ def decode_pgn_130850_simnetEventCommandApCommand(_data_raw_: int) -> NMEA2000Me
     """Decode PGN 130850."""
     nmea2000Message = NMEA2000Message(130850, 'simnetEventCommandApCommand', 'Simnet: Event Command: AP command')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50224,18 +50596,18 @@ def decode_pgn_130850_simnetEventCommandApCommand(_data_raw_: int) -> NMEA2000Me
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 2, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 2, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['SIMNET_EVENT_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "AP command", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "AP command", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:unused_a | Offset: 24, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50359,11 +50731,11 @@ def decode_pgn_130850_simnetAlarm(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130850."""
     nmea2000Message = NMEA2000Message(130850, 'simnetAlarm', 'Simnet: Alarm')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50372,11 +50744,11 @@ def decode_pgn_130850_simnetAlarm(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:address | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50391,11 +50763,11 @@ def decode_pgn_130850_simnetAlarm(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_24', 'Reserved', None, None, reserved_24, reserved_24_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 8
 
-    # 6:proprietary_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1, PartOfPrimaryKey: ,
+    # 6:proprietary_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1, PartOfPrimaryKey: True,
     running_bit_offset = 32
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['SIMNET_EVENT_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Alarm", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Alarm", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 7:reserved_40 | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50510,11 +50882,11 @@ def decode_pgn_130851(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130851."""
     nmea2000Message = NMEA2000Message(130851, 'simnetEventReplyApCommand', 'Simnet: Event Reply: AP command')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50523,18 +50895,18 @@ def decode_pgn_130851(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 2, PartOfPrimaryKey: ,
+    # 4:proprietary_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 2, PartOfPrimaryKey: True,
     running_bit_offset = 16
     proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
     proprietary_id = master_dict['SIMNET_EVENT_COMMAND'].get(proprietary_id_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "AP command", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, False))
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "AP command", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
     running_bit_offset += 8
 
     # 5:b | Offset: 24, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50662,11 +51034,11 @@ def decode_pgn_130856(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130856."""
     nmea2000Message = NMEA2000Message(130856, 'simnetAlarmMessage', 'Simnet: Alarm Message')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50675,11 +51047,11 @@ def decode_pgn_130856(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:message_id | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50763,11 +51135,11 @@ def decode_pgn_130860(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130860."""
     nmea2000Message = NMEA2000Message(130860, 'simnetApUnknown4', 'Simnet: AP Unknown 4')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50776,11 +51148,11 @@ def decode_pgn_130860(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50888,11 +51260,11 @@ def decode_pgn_130880(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130880."""
     nmea2000Message = NMEA2000Message(130880, 'airmarAdditionalWeatherData', 'Airmar: Additional Weather Data')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -50901,11 +51273,11 @@ def decode_pgn_130880(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:c | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -50989,11 +51361,11 @@ def decode_pgn_130881(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130881."""
     nmea2000Message = NMEA2000Message(130881, 'airmarHeaterControl', 'Airmar: Heater Control')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -51002,11 +51374,11 @@ def decode_pgn_130881(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:c | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -51090,11 +51462,11 @@ def decode_pgn_130918(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130918."""
     nmea2000Message = NMEA2000Message(130918, 'seatalkRouteInformation', 'SeaTalk: Route Information')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1851, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Raymarine", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -51103,11 +51475,11 @@ def decode_pgn_130918(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:current_waypoint_sequence | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -51239,11 +51611,11 @@ def decode_pgn_130944(_data_raw_: int) -> NMEA2000Message:
     """Decode PGN 130944."""
     nmea2000Message = NMEA2000Message(130944, 'airmarPost', 'Airmar: POST')
     running_bit_offset = 0
-    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: True,
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 135, PartOfPrimaryKey: ,
     running_bit_offset = 0
     manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
     manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Airmar", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 11
 
     # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
@@ -51252,11 +51624,11 @@ def decode_pgn_130944(_data_raw_: int) -> NMEA2000Message:
     nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
     running_bit_offset += 2
 
-    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: True,
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
     running_bit_offset = 13
     industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
     industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
-    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, True))
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
     # 4:control | Offset: 16, Length: 1, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
